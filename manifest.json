@@ -1,0 +1,178 @@
+{
+  "name": "DriveSafe - Roadside Assistance Nepal",
+  "short_name": "DriveSafe",
+  "description": "Emergency roadside assistance and vehicle support services across Nepal. Get help for breakdowns, flat tires, battery issues, and EV charging.",
+  "version": "1.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#007BFF",
+  "background_color": "#FFFFFF",
+  "lang": "en-NP",
+  "scope": "/",
+  
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Emergency Help",
+      "short_name": "Emergency",
+      "description": "Request immediate roadside assistance",
+      "url": "/pages/user/request-service.html?emergency=true",
+      "icons": [
+        {
+          "src": "assets/images/icons/emergency-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Track Service",
+      "short_name": "Track",
+      "description": "Track your current service request",
+      "url": "/pages/user/track-service.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/track-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Service History",
+      "short_name": "History",
+      "description": "View your service history",
+      "url": "/pages/user/history.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/history-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  
+  "categories": [
+    "business",
+    "productivity",
+    "utilities",
+    "travel"
+  ],
+  
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "DriveSafe home page on desktop"
+    },
+    {
+      "src": "assets/images/screenshots/mobile-service-request.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Service request page on mobile"
+    },
+    {
+      "src": "assets/images/screenshots/mobile-tracking.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Real-time service tracking"
+    }
+  ],
+  
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.drivesafe.nepal",
+      "id": "com.drivesafe.nepal"
+    }
+  ],
+  
+  "prefer_related_applications": false,
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+drivesafe",
+      "url": "/handle-protocol?url=%s"
+    }
+  ],
+  
+  "file_handlers": [
+    {
+      "action": "/handle-file",
+      "accept": {
+        "image/*": [".png", ".jpg", ".jpeg", ".gif"]
+      }
+    }
+  ],
+  
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "display_override": [
+    "window-controls-overlay",
+    "minimal-ui",
+    "standalone",
+    "browser"
+  ]
+}

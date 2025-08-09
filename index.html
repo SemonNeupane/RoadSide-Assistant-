@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveSafe - Roadside Assistance Nepal</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#007BFF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="DriveSafe">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading DriveSafe...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <img src="assets/images/logo.png" alt="DriveSafe" class="logo">
+                    <span class="brand-name">DriveSafe</span>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                        <li class="nav-item"><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <div class="nav-buttons">
+                        <button class="btn btn-outline" onclick="showLogin()">Login</button>
+                        <button class="btn btn-primary" onclick="showRegister()">Sign Up</button>
+                    </div>
+                </div>
+                
+                <button class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Emergency Roadside Assistance<br>
+                        <span class="accent">Anywhere in Nepal</span>
+                    </h1>
+                    <p class="hero-description">
+                        Get instant help for your vehicle breakdown, flat tire, battery jump-start, 
+                        or EV charging support. Professional assistance is just a tap away.
+                    </p>
+                    
+                    <!-- Quick Service Request -->
+                    <div class="quick-request">
+                        <h3>Need Help Right Now?</h3>
+                        <div class="location-input">
+                            <input type="text" id="emergency-location" placeholder="Enter your location" readonly>
+                            <button class="btn-location" onclick="getCurrentLocation()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn btn-emergency" onclick="requestEmergencyHelp()" disabled id="emergency-btn">
+                            🚨 Request Emergency Help
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="hero-image">
+                        <div class="floating-card service-card">
+                            <div class="service-icon">🔧</div>
+                            <span>Quick Repair</span>
+                        </div>
+                        <div class="floating-card agent-card">
+                            <div class="agent-status online"></div>
+                            <span>Agent Available</span>
+                        </div>
+                        <div class="floating-card eta-card">
+                            <span>ETA: 15 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Services</h2>
+                    <p>Professional roadside assistance tailored for Nepal's roads</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">🔋</div>
+                        <h3>Battery Jump-Start</h3>
+                        <p>Dead battery? We'll get you moving again with professional jump-start service.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">🚗</div>
+                        <h3>Vehicle Towing</h3>
+                        <p>Safe and reliable towing service to the nearest workshop or your preferred location.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">⚡</div>
+                        <h3>EV Support</h3>
+                        <p>Electric vehicle charging assistance and specialized EV towing services.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">🔧</div>
+                        <h3>Minor Repairs</h3>
+                        <p>Quick fixes for common roadside issues to get you back on the road.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">🛞</div>
+                        <h3>Flat Tire Repair</h3>
+                        <p>Tire puncture repair and replacement service available 24/7.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-icon">🧽</div>
+                        <h3>Mobile Car Wash</h3>
+                        <p>Professional car cleaning service at your location.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Get help in three simple steps</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Request Service</h3>
+                            <p>Tell us your location and what kind of help you need</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Get Matched</h3>
+                            <p>We'll find the nearest qualified agent for your specific need</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Get Help</h3>
+                            <p>Track your agent in real-time and get back on the road</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>Available 24/7 for emergency roadside assistance</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <strong>Emergency Hotline:</strong>
+                                <span>+977-1-XXXXX</span>
+                            </div>
+                            <div class="contact-item">
+                                <strong>Email Support:</strong>
+                                <span>help@drivesafe.com.np</span>
+                            </div>
+                            <div class="contact-item">
+                                <strong>Service Areas:</strong>
+                                <span>Kathmandu, Pokhara, Chitwan & expanding</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="app-download">
+                        <h3>Install DriveSafe</h3>
+                        <p>Add to your home screen for quick access</p>
+                        <button class="btn btn-primary" id="install-btn" style="display: none;">
+                            📱 Install App
+                        </button>
+                        <button class="btn btn-outline" onclick="showInstallInstructions()">
+                            📋 Installation Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="assets/images/logo.png" alt="DriveSafe" class="footer-logo">
+                        <span>DriveSafe</span>
+                    </div>
+                    <p>Reliable roadside assistance across Nepal</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Emergency Towing</a></li>
+                        <li><a href="#services">Battery Jump-Start</a></li>
+                        <li><a href="#services">EV Support</a></li>
+                        <li><a href="#services">Tire Repair</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 DriveSafe Nepal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modals -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to DriveSafe</h3>
+                <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+            </div>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email or Phone</label>
+                    <input type="text" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <div class="form-links">
+                    <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                    <a href="#" onclick="showRegister()">Don't have an account? Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Account</h3>
+                <button class="modal-close" onclick="closeModal('register-modal')">&times;</button>
+            </div>
+            <div class="role-selector">
+                <button class="role-btn active" data-role="user">I Need Help</button>
+                <button class="role-btn" data-role="agent">I Provide Service</button>
+            </div>
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone">Phone Number</label>
+                    <input type="tel" id="reg-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm">Confirm Password</label>
+                    <input type="password" id="reg-confirm" required>
+                </div>
+                <div class="agent-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="service-type">Service Specialization</label>
+                        <select id="service-type">
+                            <option value="towing">Towing Service</option>
+                            <option value="mechanic">Mechanic</option>
+                            <option value="ev-specialist">EV Specialist</option>
+                            <option value="general">General Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-area">Service Area</label>
+                        <select id="service-area">
+                            <option value="kathmandu">Kathmandu Valley</option>
+                            <option value="pokhara">Pokhara</option>
+                            <option value="chitwan">Chitwan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree-terms" required>
+                        <span>I agree to the <a href="#terms">Terms of Service</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                <div class="form-links">
+                    <a href="#" onclick="showLogin()">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config/constants.js"></script>
+    <script src="config/api-endpoints.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
