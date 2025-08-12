@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - DriveSafe</title>
+    <link rel="stylesheet" href="../../assets/css/themes.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-wrapper">
+            <!-- Left Side - Branding -->
+            <div class="auth-brand">
+                <div class="brand-content">
+                    <div class="logo-large">
+                        <i class="fas fa-car-side"></i>
+                        <h1>DriveSafe</h1>
+                    </div>
+                    <h2>Join DriveSafe Today!</h2>
+                    <p>Create your account and get instant access to Nepal's most reliable roadside assistance network.</p>
+                    
+                    <div class="brand-features">
+                        <div class="feature">
+                            <i class="fas fa-user-shield text-success"></i>
+                            <span>Verified Service Providers</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mobile-alt text-primary"></i>
+                            <span>Real-time GPS Tracking</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-credit-card text-warning"></i>
+                            <span>Secure Online Payments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Registration Form -->
+            <div class="auth-form-container">
+                <div class="auth-form">
+                    <div class="form-header">
+                        <h3>Create Account</h3>
+                        <p>Fill in your details to get started</p>
+                    </div>
+
+                    <form id="registerForm" class="register-form">
+                        <!-- Role Selection -->
+                        <div class="form-group">
+                            <label>Register As:</label>
+                            <div class="role-tabs">
+                                <button type="button" class="role-tab active" data-role="user">
+                                    <i class="fas fa-user"></i>
+                                    <span>User</span>
+                                </button>
+                                <button type="button" class="role-tab" data-role="agent">
+                                    <i class="fas fa-wrench"></i>
+                                    <span>Service Agent</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="firstName">
+                                    <i class="fas fa-user"></i>
+                                    First Name
+                                </label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                                <span class="error-message" id="firstNameError"></span>
+                            </div>
+                            <div class="form-group half">
+                                <label for="lastName">
+                                    <i class="fas fa-user"></i>
+                                    Last Name
+                                </label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                                <span class="error-message" id="lastNameError"></span>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="phone">
+                                <i class="fas fa-phone"></i>
+                                Phone Number
+                            </label>
+                            <div class="phone-input">
+                                <select id="countryCode" name="countryCode">
+                                    <option value="+977">🇳🇵 +977</option>
+                                </select>
+                                <input type="tel" id="phone" name="phone" placeholder="98XXXXXXXX" required>
+                            </div>
+                            <span class="error-message" id="phoneError"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="password" name="password" placeholder="Create password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <span class="strength-text" id="strengthText">Password Strength</span>
+                            </div>
+                            <span class="error-message" id="passwordError"></span>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="fas fa-lock"></i>
+                                Confirm Password
+                            </label>
+                            <div class="password-input">
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="error-message" id="confirmPasswordError"></span>
+                        </div>
+
+                        <!-- Location (for Agents) -->
+                        <div id="agentFields" style="display: none;">
+                            <div class="form-group">
+                                <label for="serviceArea">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Service Area (District)
+                                </label>
+                                <select id="serviceArea" name="serviceArea">
+                                    <option value="">Select District</option>
+                                    <option value="kathmandu">Kathmandu</option>
+                                    <option value="bhaktapur">Bhaktapur</option>
+                                    <option value="lalitpur">Lalitpur</option>
+                                    <option value="pokhara">Pokhara</option>
+                                    <option value="chitwan">Chitwan</option>
+                                    <!-- Add more districts -->
+                                </select>
+                                <span class="error-message" id="serviceAreaError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Service Specializations:</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="services[]" value="towing">
+                                        <span class="checkmark"></span>
+                                        <i class="fas fa-truck"></i>
+                                        Towing Services
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="services[]" value="battery">
+                                        <span class="checkmark"></span>
+                                        <i class="fas fa-battery-half"></i>
+                                        Battery Jumpstart
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="services[]" value="puncture">
+                                        <span class="checkmark"></span>
+                                        <i class="fas fa-circle"></i>
+                                        Tire/Puncture Repair
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="services[]" value="mechanic">
+                                        <span class="checkmark"></span>
+                                        <i class="fas fa-wrench"></i>
+                                        Mechanical Repairs
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="services[]" value="ev">
+                                        <span class="checkmark"></span>
+                                        <i class="fas fa-bolt"></i>
+                                        EV Support
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <!-- Marketing Consent -->
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="marketingConsent" name="marketingConsent">
+                                <span class="checkmark"></span>
+                                I want to receive updates about services and offers
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-primary btn-full" id="registerButton">
+                            <span class="btn-text">Create Account</span>
+                            <span class="btn-loader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </span>
+                        </button>
+
+                        <!-- Error Display -->
+                        <div class="form-error" id="registerError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span id="registerErrorMessage"></span>
+                        </div>
+                    </form>
+
+                    <!-- Social Registration -->
+                    <div class="social-login">
+                        <div class="divider">
+                            <span>or register with</span>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="btn-social google" onclick="registerWithGoogle()">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button class="btn-social facebook" onclick="registerWithFacebook()">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="auth-switch">
+                        <p>Already have an account? 
+                            <a href="login.html">Sign in here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../config/constants.js"></script>
+    <script src="../../config/api-endpoints.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRegister();
+            
+            // Role tab switching
+            document.querySelectorAll('.role-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const role = this.dataset.role;
+                    const agentFields = document.getElementById('agentFields');
+                    
+                    if (role === 'agent') {
+                        agentFields.style.display = 'block';
+                    } else {
+                        agentFields.style.display = 'none';
+                    }
+                });
+            });
+
+            // Password strength checker
+            document.getElementById('password').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+        });
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.parentElement.querySelector('.password-toggle i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            let text = 'Weak';
+            let color = '#dc3545';
+
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+            switch(strength) {
+                case 0:
+                case 1:
+                    text = 'Very Weak';
+                    color = '#dc3545';
+                    break;
+                case 2:
+                    text = 'Weak';
+                    color = '#fd7e14';
+                    break;
+                case 3:
+                    text = 'Fair';
+                    color = '#ffc107';
+                    break;
+                case 4:
+                    text = 'Good';
+                    color = '#20c997';
+                    break;
+                case 5:
+                    text = 'Strong';
+                    color = '#28a745';
+                    break;
+            }
+
+            strengthFill.style.width = (strength * 20) + '%';
+            strengthFill.style.backgroundColor = color;
+            strengthText.textContent = text;
+            strengthText.style.color = color;
+        }
+    </script>
+</body>
+</html>
