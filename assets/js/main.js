@@ -857,6 +857,5 @@ window.addEventListener('popstate', (event) => {
         if (window.app) window.app.closeModal(modal.id);
     });
 });
-
 // Export for ES6 modules (if used elsewhere)
 export default DriveSafeApp;
