@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2025 at 12:07 AM
+-- Generation Time: Oct 30, 2025 at 02:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,11 @@ CREATE TABLE `admin` (
 CREATE TABLE `agent` (
   `agent_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
-  `status` enum('active','inactive') DEFAULT 'active'
+  `status` enum('active','inactive') DEFAULT 'active',
+  `approved_by_admin` int(10) DEFAULT NULL,
+  `approved_date` datetime NOT NULL,
+  `disabled_by_admin` int(10) DEFAULT NULL,
+  `disabled_remarks` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -166,7 +170,7 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
-  `role` enum('admin','user','guest') DEFAULT 'user',
+  `role` enum('admin','user','agent') DEFAULT 'user',
   `registration_date` date NOT NULL,
   `status` enum('active','inactive') DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -216,7 +220,9 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `agent`
   ADD PRIMARY KEY (`agent_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `fk_approved_by_admin` (`approved_by_admin`),
+  ADD KEY `fk_disabled_by_admin` (`disabled_by_admin`);
 
 --
 -- Indexes for table `agent_location`
@@ -395,7 +401,9 @@ ALTER TABLE `vehicle`
 -- Constraints for table `agent`
 --
 ALTER TABLE `agent`
-  ADD CONSTRAINT `agent_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `agent_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `fk_approved_by_admin` FOREIGN KEY (`approved_by_admin`) REFERENCES `admin` (`admin_id`),
+  ADD CONSTRAINT `fk_disabled_by_admin` FOREIGN KEY (`disabled_by_admin`) REFERENCES `admin` (`admin_id`);
 
 --
 -- Constraints for table `agent_location`
