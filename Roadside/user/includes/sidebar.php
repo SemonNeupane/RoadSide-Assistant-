@@ -1,98 +1,106 @@
-<?php
-session_start();
-error_reporting(0);
-include('../admin/includes/dbconnection.php');
+<div class="sidebar">
+    <h2>RSA Nepal</h2>
 
-// Check if user is logged in
-if (empty($_SESSION['sid'])) {
-    header('location:logout.php');
-    exit();
+    <a href="dashboard.php">Dashboard</a>
+
+    <!-- My Bookings with submenu -->
+    <div class="submenu">
+        <a href="#" class="submenu-toggle">
+            My Bookings
+            <span class="arrow">&#9654;</span>
+        </a>
+
+        <div class="submenu-links">
+            <a href="service-request.php">Request Service</a>
+            <a href="service-history.php">Service History</a>
+        </div>
+    </div>
+
+    <a href="feedback.php">Feedback</a>
+    <a href="../logout.php">Logout</a>
+</div>
+<style>
+    /* Sidebar Base */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #1f2937;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
 }
 
-$uid = $_SESSION['sid'];
-// Fetch user name from db_rsa.users table
-$ret = mysqli_query($con, "SELECT username FROM users WHERE user_id='$uid'");
-$row = mysqli_fetch_array($ret);
-$name = htmlspecialchars($row['username']);
-?>
+/* Title */
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #38bdf8;
+}
 
-<!-- ========== Left Sidebar Start ========== -->
-<div class="left side-menu">
-    <div class="slimscroll-menu" id="remove-scroll">
+/* Main Links */
+.sidebar a {
+    display: block;
+    padding: 14px 20px;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
 
-        <!-- LOGO -->
-        <div class="topbar-left">
-            <h3>RSA | USER</h3>
-            <hr />
-        </div>
+.sidebar a:hover {
+    background: #111827;
+    color: #38bdf8;
+}
 
-        <!-- User box -->
-        <div class="user-box">
-            <div class="user-img">
-                <img src="../assets/images/user.png" alt="user-img" class="rounded-circle img-fluid">
-            </div>
+/* My Bookings Dropdown */
+.submenu {
+    width: 100%;
+}
 
-            <h5><?php echo $name; ?></h5>
-            <p class="text-muted">RSA User</p>
-        </div>
+/* Submenu Toggle Link */
+.submenu-toggle {
+    cursor: pointer;
+}
 
-        <!-- Sidebar Menu -->
-        <div id="sidebar-menu">
-            <ul class="metismenu" id="side-menu">
-                <li>
-                    <a href="welcome.php">
-                        <i class="fi-air-play"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+/* Arrow Icon */
+.arrow {
+    float: right;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
 
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="fi-layers"></i><span>Service Requests</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="service-request.php">Request Service</a></li>
-                        <li><a href="service-history.php">Request History</a></li>
-                    </ul>
-                </li>
+/* Submenu Links */
+.submenu-links {
+    display: none;
+    background: #111827;
+}
 
-                <li>
-                    <a href="javascript:void(0);">
-                        <i class="fi-layers"></i><span>Enquiries</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="enquiry-form.php">Enquiry Form</a></li>
-                        <li><a href="enquiry-history.php">Enquiry History</a></li>
-                    </ul>
-                </li>
+.submenu-links a {
+    padding: 12px 40px;
+    font-size: 14px;
+    color: #d1d5db;
+}
 
-                <li>
-                    <a href="feedback.php">
-                        <i class="fi-comment"></i>
-                        <span>Feedback</span>
-                    </a>
-                </li>
+/* Hover on Submenu */
+.submenu-links a:hover {
+    background: #020617;
+    color: #38bdf8;
+}
 
-                <li>
-                    <a href="support.php">
-                        <i class="fi-help"></i>
-                        <span>Support</span>
-                    </a>
-                </li>
+/* Open State */
+.submenu.open .submenu-links {
+    display: block;
+}
 
-                <li>
-                    <a href="logout.php">
-                        <i class="fi-power"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- End Sidebar Menu -->
+.submenu.open .arrow {
+    transform: rotate(90deg);
+}
 
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- Left Sidebar End -->
+    </style>
+    <script>
+document.querySelector('.submenu-toggle').addEventListener('click', function(e){
+    e.preventDefault();
+    this.parentElement.classList.toggle('open');
+});
+</script>

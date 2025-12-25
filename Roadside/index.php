@@ -13,9 +13,11 @@
             <div class="logo">RSA Nepal</div>
             <div class="nav-links">
                 <a href="#" class="nav-link" onclick="showHome()">Home</a>
-                <a href="user/register.php" class="nav-link" onclick="showSignup()">Signup</a>
-                <a href="user/index.php" class="nav-link" onclick="showSignin()">Signin</a>
-                <a href="#" class="nav-link" onclick="showAdminLogin()">Admin</a>
+                <a href="user/register.php" class="nav-link" onclick="showSignup()">User Signup</a>
+                <a href="agent/agent-register.php" class="nav-link" onclick="showSignup()">Agent Signup</a>
+
+                <a href="login.php" class="nav-link" >Signin</a>
+                <!-- <a href="#" class="nav-link" onclick="showAdminLogin()">Admin</a> -->
             </div>
         </nav>
     </header>
@@ -38,21 +40,21 @@
     <!-- Home Page -->
     <div id="home-page">
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="vehicle-icons">
+        <!-- <section class="hero"> -->
+            <!-- <div class="vehicle-icons">
                 <div class="vehicle-icon">🚛</div>
                 <div class="vehicle-icon">🏍️</div>
                 <div class="vehicle-icon">🔋</div>
                 <div class="vehicle-icon">⛽</div>
                 <div class="vehicle-icon">🔧</div>
                 <div class="vehicle-icon">🛞</div>
-            </div>
+            </div> -->
             <!-- <div class="hero-content">
                 <h1>Roadside Assistance<br>Management System</h1>
                 <p>24/7 Emergency vehicle support across Nepal. Get help when you need it most with our verified network of professional agents.</p>
                 <button class="cta-button" onclick="scrollToServices()">Get Help Now</button>
             </div> -->
-        </section>
+        <!-- </section> -->
 
         <!-- Services Section -->
         <section id="services" class="services">
@@ -139,7 +141,7 @@
                         <div class="form-group">
                             <label>Your Location</label>
                             <input type="text" id="location" class="form-control" placeholder="Enter your current location" required>
-                            <button type="button" class="location-btn" onclick="getCurrentLocation()">📍 Use GPS Location</button>
+                            <!-- <button type="button" class="location-btn" onclick="getCurrentLocation()">📍 Use GPS Location</button> -->
                         </div>
                         
                         <div class="form-group">

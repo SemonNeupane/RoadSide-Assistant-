@@ -1,118 +1,62 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+include(__DIR__ . '/../includes/dbconnection.php');
+ // Path to your centralized DB connection
 
-// Database connection
-include('../admin/includes/dbconnection.php');
+$msg = '';
 
-// Initialize message variable
-$msg = "";
-
-if(isset($_POST['submit'])) {
-    // Get form values
-    $username = mysqli_real_escape_string($con, $_POST['fullname']);
-    $phone    = mysqli_real_escape_string($con, $_POST['mobilenumber']);
-    $email    = mysqli_real_escape_string($con, $_POST['email']);
-    $password = md5($_POST['password']); // md5 for now
-    $reg_date = date('Y-m-d');
+if(isset($_POST['register'])){
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $phone = mysqli_real_escape_string($con, $_POST['phone']);
+    $password = md5($_POST['password']); // Using md5 to match login system
+    $role = 'user'; // This is fixed for user registration
+    $status = 'active'; // Users are active immediately
 
     // Check if email or phone already exists
-    $check = mysqli_query($con, "SELECT user_id FROM users WHERE email='$email' OR phone='$phone'");
-    if(!$check){
-        die("Query failed: " . mysqli_error($con));
-    }
-
-    if(mysqli_num_rows($check) > 0){
-        $msg = "This email or contact number is already associated with another account";
+    $checkQuery = mysqli_query($con, "SELECT * FROM users WHERE email='$email' OR phone='$phone'");
+    if(mysqli_num_rows($checkQuery) > 0){
+        $msg = "Email or phone already registered.";
     } else {
-        // Insert into users table
-        $insert = mysqli_query($con, "INSERT INTO users (username, email, password, phone, registration_date) VALUES ('$username', '$email', '$password', '$phone', '$reg_date')");
-        if(!$insert){
-            die("Insert failed: " . mysqli_error($con));
+        // Insert user
+        $insertQuery = mysqli_query($con, "INSERT INTO users (username,email,phone,password,role,status) VALUES ('$username','$email','$phone','$password','$role','$status')");
+        if($insertQuery){
+            $msg = "Registration successful! <a href='../login.php'>Login here</a>.";
         } else {
-            $msg = "You have successfully registered. <a href='index.php'>Login Here</a>";
+            $msg = "Error: ".mysqli_error($con);
         }
     }
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Vehicle Service Management System | Sign Up</title>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <script>
-        function checkpass() {
-            if(document.signup.password.value != document.signup.repeatpassword.value){
-                alert('Password and Repeat Password do not match');
-                document.signup.repeatpassword.focus();
-                return false;
-            }
-            return true;
-        }
-    </script>
+<meta charset="UTF-8">
+<title>RSA Nepal | User Signup</title>
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+body{font-family:Arial,sans-serif;background:#f2f4f7;}
+.wrapper-page{max-width:400px;margin:50px auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+h3{text-align:center;margin-bottom:20px;}
+.form-control{width:100%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;}
+.btn-custom{width:100%;padding:12px;background:#007bff;color:#fff;border:none;border-radius:8px;cursor:pointer;}
+.btn-custom:hover{background:#0056b3;}
+p.msg{color:red;text-align:center;font-weight:bold;}
+</style>
 </head>
-<body class="account-pages">
-
-<div class="wrapper-page account-page-full">
-    <div class="card">
-        <div class="card-block">
-            <div class="account-box">
-                <div class="card-box p-5">
-                    <h3 class="text-center pb-4">
-                        <a href="../index.php"><span>RSAM | Sign Up</span></a>
-                    </h3>
-                    <p style="color:red; text-align:center;"><?php echo $msg; ?></p>
-
-                    <form name="signup" method="post" onsubmit="return checkpass();">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" name="fullname" class="form-control" required placeholder="Enter Your Full Name">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Mobile Number</label>
-                            <input type="text" name="mobilenumber" class="form-control" required maxlength="10" pattern="[0-9]+" placeholder="Enter Your Mobile Number">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="email" class="form-control" required placeholder="abc@gmail.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" required placeholder="Enter your password">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Repeat Password</label>
-                            <input type="password" name="repeatpassword" class="form-control" required placeholder="Repeat your password">
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <input id="terms" type="checkbox" required>
-                                <label for="terms">I accept <a href="terms-conditions.php">Terms and Conditions</a></label>
-                            </div>
-                        </div>
-
-                        <div class="form-group text-center">
-                            <button type="submit" name="submit" class="btn btn-custom btn-block">Sign Up Free</button>
-                        </div>
-                    </form>
-
-                    <p class="text-center">Already have an account? <a href="index.php"><b>Sign In</b></a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+<div class="wrapper-page">
+    <h3>User Registration</h3>
+    <p class="msg"><?php echo $msg; ?></p>
+    <form method="post" action="">
+        <input type="text" name="username" class="form-control" required placeholder="Full Name">
+        <input type="email" name="email" class="form-control" required placeholder="Email">
+        <input type="tel" name="phone" class="form-control" required placeholder="Phone Number">
+        <input type="password" name="password" class="form-control" required placeholder="Password">
+        <button type="submit" name="register" class="btn-custom">Register</button>
+    </form>
+    <p style="text-align:center;margin-top:15px;">Already have an account? <a href="../login.php">Login</a></p>
 </div>
-
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
