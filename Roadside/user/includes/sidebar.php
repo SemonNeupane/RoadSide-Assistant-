@@ -3,7 +3,7 @@
 
     <a href="dashboard.php">Dashboard</a>
 
-    <!-- My Bookings with submenu -->
+    <!-- My Bookings Dropdown -->
     <div class="submenu">
         <a href="#" class="submenu-toggle">
             My Bookings
@@ -16,11 +16,12 @@
         </div>
     </div>
 
-    <a href="feedback.php">Feedback</a>
+    <a href="profile.php">Profile</a>
     <a href="../logout.php">Logout</a>
 </div>
+
 <style>
-    /* Sidebar Base */
+/* Sidebar Base */
 .sidebar {
     width: 240px;
     height: 100vh;
@@ -29,13 +30,15 @@
     top: 0;
     left: 0;
     padding-top: 20px;
+    overflow-y: auto;
 }
 
-/* Title */
+/* Sidebar Title */
 .sidebar h2 {
     text-align: center;
     margin-bottom: 30px;
     color: #38bdf8;
+    font-size: 22px;
 }
 
 /* Main Links */
@@ -53,14 +56,15 @@
     color: #38bdf8;
 }
 
-/* My Bookings Dropdown */
+/* Submenu Wrapper */
 .submenu {
     width: 100%;
 }
 
-/* Submenu Toggle Link */
+/* Submenu Toggle */
 .submenu-toggle {
     cursor: pointer;
+    position: relative;
 }
 
 /* Arrow Icon */
@@ -82,7 +86,7 @@
     color: #d1d5db;
 }
 
-/* Hover on Submenu */
+/* Hover on Submenu Links */
 .submenu-links a:hover {
     background: #020617;
     color: #38bdf8;
@@ -96,11 +100,15 @@
 .submenu.open .arrow {
     transform: rotate(90deg);
 }
+</style>
 
-    </style>
-    <script>
-document.querySelector('.submenu-toggle').addEventListener('click', function(e){
-    e.preventDefault();
-    this.parentElement.classList.toggle('open');
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".submenu-toggle");
+
+    toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        this.parentElement.classList.toggle("open");
+    });
 });
 </script>

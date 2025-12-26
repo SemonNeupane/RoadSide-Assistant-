@@ -167,6 +167,7 @@ $user = mysqli_fetch_assoc($userQuery);
 
         <!-- Header -->
         <?php include(__DIR__ . '/includes/header.php'); ?>
+        
 
         <div class="card">
             <h3>Welcome Back, <?php echo htmlspecialchars($user['username']); ?> 👋</h3>
