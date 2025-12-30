@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2025 at 02:53 PM
+-- Generation Time: Dec 30, 2025 at 07:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,6 +49,13 @@ CREATE TABLE `agent` (
   `disabled_remarks` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `agent`
+--
+
+INSERT INTO `agent` (`agent_id`, `user_id`, `status`, `approved_by_admin`, `approved_date`, `disabled_by_admin`, `disabled_remarks`) VALUES
+(1, 2, 'active', NULL, '2025-12-29 23:16:14', NULL, '');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +100,21 @@ CREATE TABLE `booking` (
   `completed_at` date NOT NULL,
   `landmark` varchar(255) NOT NULL,
   `user_location_id` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business`
+--
+
+CREATE TABLE `business` (
+  `business_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
+  `address` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -175,6 +197,14 @@ CREATE TABLE `users` (
   `status` enum('active','inactive') DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `phone`, `role`, `registration_date`, `status`) VALUES
+(1, 'semon', 'semon@gmail.com', '535a76c4b19e43150198965f3ae570f2', '9827313757', 'user', '0000-00-00', 'active'),
+(2, 'anamika@gmail.com', 'anamika@gmail.com', '012424224c77e9b1d29b271aa4611a45', '9827313744', 'agent', '2025-12-29', 'active');
+
 -- --------------------------------------------------------
 
 --
@@ -254,6 +284,13 @@ ALTER TABLE `booking`
   ADD KEY `user_location_id` (`user_location_id`);
 
 --
+-- Indexes for table `business`
+--
+ALTER TABLE `business`
+  ADD PRIMARY KEY (`business_id`),
+  ADD KEY `idx_user_id` (`user_id`);
+
+--
 -- Indexes for table `city`
 --
 ALTER TABLE `city`
@@ -325,7 +362,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `agent_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `agent_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `agent_location`
@@ -344,6 +381,12 @@ ALTER TABLE `agent_service`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `business`
+--
+ALTER TABLE `business`
+  MODIFY `business_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -379,7 +422,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_location`
@@ -430,6 +473,12 @@ ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_4` FOREIGN KEY (`service_id`) REFERENCES `services` (`service_id`),
   ADD CONSTRAINT `booking_ibfk_5` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`),
   ADD CONSTRAINT `booking_ibfk_6` FOREIGN KEY (`user_location_id`) REFERENCES `user_location` (`user_location_id`);
+
+--
+-- Constraints for table `business`
+--
+ALTER TABLE `business`
+  ADD CONSTRAINT `fk_business_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `city`
