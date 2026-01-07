@@ -39,7 +39,7 @@ if(isset($_POST['register'])){
                 ");
             }
 
-            $msg = "Registration successful! <a href='../login.php'>Login here</a>";
+            $msg = "Registration successful! <a href='login.php'>Login here</a>";
         } else {
             $msg = "Error inserting user data!";
         }

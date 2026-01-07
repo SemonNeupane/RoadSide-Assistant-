@@ -75,10 +75,12 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'User';
                     </a>
                 </li>
                 <li>
-                    <a href="/roadside/register.php">
-                        <span>Be an Agent</span>
-                    </a>
-                </li>
+    <a href="/RoadSide-Assistant-/Roadside/register.php">
+        <span>Be an Agent</span>
+    </a>
+</li>
+
+
 
                
 
