@@ -13,8 +13,8 @@
             <div class="logo">RSA Nepal</div>
             <div class="nav-links">
                 <a href="#" class="nav-link" onclick="showHome()">Home</a>
-                <a href="user/register.php" class="nav-link" onclick="showSignup()">User Signup</a>
-                <a href="agent/agent-register.php" class="nav-link" onclick="showSignup()">Agent Signup</a>
+                <a href="register.php" class="nav-link" onclick="showSignup()"> Signup</a>
+                
 
                 <a href="login.php" class="nav-link" >Signin</a>
                 <!-- <a href="#" class="nav-link" onclick="showAdminLogin()">Admin</a> -->

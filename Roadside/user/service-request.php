@@ -1,101 +1,181 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-include(__DIR__ . '/../includes/dbconnection.php'); // adjust path if needed
+include(__DIR__ . '/../includes/dbconnection.php');
 
-if(strlen($_SESSION['sid'])==0){
-    header('location:logout.php');
+// ✅ Only allow logged-in users
+if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+    header('location:../login.php');
     exit();
 }
 
-if(isset($_POST['submit'])){
+$user_id = $_SESSION['user_id'];
+$msg = '';
 
-    $user_id       = $_SESSION['sid'];
-    $vehicle_type  = $_POST['vehicletype'];
-    $model         = $_POST['vehilemodel'];
-    $registration  = $_POST['vehicleregno'];
-    $service_id    = $_POST['service'];
-    $city_id       = $_POST['city'];
-    $landmark      = $_POST['pickupadd'];
-    $created_at    = date('Y-m-d');
-    $status        = 'active';
-    $agent_id      = 1; // default agent
+if (isset($_POST['submit'])) {
+    $vehicle_type = $_POST['vehicletype'];
+    $model        = $_POST['vehiclemodel'];
+    $registration = $_POST['vehicleregno'];
+    $service_id   = $_POST['service'];
+    $city_id      = $_POST['city'];
+    $landmark     = $_POST['pickupadd'];
+    $created_at   = date('Y-m-d H:i:s');
+    $status       = 'active';
 
-    // INSERT VEHICLE
+    // ===== Insert Vehicle =====
     $stmt = $con->prepare("INSERT INTO vehicle(vehicle_type, model, registration_no, user_id) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param('sssi', $vehicle_type, $model, $registration, $user_id);
-    if(!$stmt->execute()){
-        echo "<script>alert('Error inserting vehicle: ".$stmt->error."');</script>";
-        exit;
-    }
-    $vehicle_id = $stmt->insert_id;
-    $stmt->close();
-
-    // INSERT USER LOCATION
-    $stmt = $con->prepare("INSERT INTO user_location(created_at, user_id, city_id, landmark) VALUES (NOW(), ?, ?, ?)");
-    $stmt->bind_param('iis', $user_id, $city_id, $landmark);
-    if(!$stmt->execute()){
-        echo "<script>alert('Error inserting location: ".$stmt->error."');</script>";
-        exit;
-    }
-    $user_location_id = $stmt->insert_id;
-    $stmt->close();
-
-    // INSERT BOOKING
-    $stmt = $con->prepare("
-        INSERT INTO booking(
-            user_id, agent_id, vehicle_id, service_id,
-            city_id, created_at, status, landmark, user_location_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
-    $stmt->bind_param(
-        'iiiiisssi',
-        $user_id,
-        $agent_id,
-        $vehicle_id,
-        $service_id,
-        $city_id,
-        $created_at,
-        $status,
-        $landmark,
-        $user_location_id
-    );
-    if($stmt->execute()){
-        echo "<script>alert('Service Request Submitted Successfully');</script>";
-        echo "<script>window.location='service-request.php'</script>";
+    $stmt->bind_param("sssi", $vehicle_type, $model, $registration, $user_id);
+    if (!$stmt->execute()) {
+        $msg = "Error inserting vehicle: " . $stmt->error;
     } else {
-        echo "<script>alert('Error submitting booking: ".$stmt->error."');</script>";
+        $vehicle_id = $stmt->insert_id;
+        $stmt->close();
+
+        // ===== Insert User Location =====
+        $stmt = $con->prepare("INSERT INTO user_location(created_at, user_id, city_id, landmark) VALUES (NOW(), ?, ?, ?)");
+        $stmt->bind_param("iis", $user_id, $city_id, $landmark);
+        if (!$stmt->execute()) {
+            $msg = "Error inserting location: " . $stmt->error;
+        } else {
+            $user_location_id = $stmt->insert_id;
+            $stmt->close();
+
+            // ===== Assign Agent =====
+            // Pick first active agent for this city & service
+            $agent_q = mysqli_query($con, "
+                SELECT a.agent_id 
+                FROM agent a
+                JOIN agent_location al ON a.agent_id = al.agent_id
+                JOIN agent_service asv ON a.agent_id = asv.agent_id
+                WHERE a.status='active' 
+                  AND al.city_id='$city_id'
+                  AND asv.service_id='$service_id'
+                LIMIT 1
+            ");
+
+            if (mysqli_num_rows($agent_q) > 0) {
+                $agent_row = mysqli_fetch_assoc($agent_q);
+                $agent_id = $agent_row['agent_id'];
+            } else {
+                $agent_id = 1; // fallback default agent
+            }
+
+            // ===== Insert Booking =====
+            $stmt = $con->prepare("
+                INSERT INTO booking(user_id, agent_id, vehicle_id, service_id, city_id, created_at, status, landmark, user_location_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->bind_param("iiiiisssi", $user_id, $agent_id, $vehicle_id, $service_id, $city_id, $created_at, $status, $landmark, $user_location_id);
+
+            if ($stmt->execute()) {
+                $msg = "Service Request Submitted Successfully!";
+            } else {
+                $msg = "Error submitting booking: " . $stmt->error;
+            }
+            $stmt->close();
+        }
     }
-    $stmt->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Roadside Assistance - Service Request</title>
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+<title>RSA Nepal | Service Request</title>
+
 <style>
-html, body {height:100%; margin:0; font-family:Arial,Helvetica,sans-serif; background:#f4f6f8;}
-#wrapper {display:flex; min-height:100vh; flex-direction:column;}
-.content-page {flex:1; padding:30px; margin-left:260px;}
-.card-box {background:#fff; border:1px solid #e5e7eb; border-radius:4px; padding:25px 30px; max-width:900px; margin:auto;}
-.header-title {font-size:16px; font-weight:600; text-transform:uppercase; border-bottom:1px solid #e5e7eb; padding-bottom:10px; margin-bottom:25px;}
-.form-group {display:flex; align-items:center; margin-bottom:15px;}
-.col-form-label {width:220px; font-size:13px; font-weight:600;}
-.form-control {flex:1; height:36px; padding:6px 10px; border:1px solid #cbd5e1; border-radius:3px; font-size:13px;}
-.form-control:focus {outline:none; border-color:#60a5fa; box-shadow:0 0 0 2px rgba(96,165,250,.2);}
-.btn-info {background:#38bdf8; border:none; color:#fff; font-size:13px; padding:8px 24px; border-radius:3px;}
-.btn-info:hover {background:#0ea5e9;}
-.text-center {text-align:center;}
-footer {margin-top:auto; padding:12px 0; text-align:center; font-size:13px; color:#64748b; border-top:1px solid #e5e7eb; background:#fff;}
-@media(max-width:768px){
-    .content-page{margin-left:0;}
-    .form-group{flex-direction:column; align-items:flex-start;}
-    .col-form-label{width:100%; margin-bottom:6px;}
+
+:root {
+    --sidebar-width: 260px; /* same as sidebar */
+    --header-height: 60px;  /* same as header */
 }
+
+/* ===== MAIN CONTENT ===== */
+.content {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: 25px;
+    min-height: 100vh;
+    background: #f3f4f6; /* light background like user dashboard */
+}
+
+/* ===== CARD BOX ===== */
+.card-box {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* CARD TITLE */
+.card-box h4.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+    outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn-info {
+    background: #38bdf8;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+    background: #0ea5e9;
+}
+
+/* ===== SUCCESS MESSAGE ===== */
+p[style*="color:green"] {
+    font-weight: 500;
+    color: #16a34a !important;
+    margin-bottom: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+    .content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .card-box {
+        padding: 20px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -107,60 +187,64 @@ footer {margin-top:auto; padding:12px 0; text-align:center; font-size:13px; colo
 <?php include('includes/header.php'); ?>
 
 <div class="content">
-<div class="container-fluid">
 <div class="card-box">
-<h4 class="header-title">Service Request Form</h4>
-<form method="post">
-    <div class="form-group">
-        <label class="col-form-label">Vehicle Type</label>
-        <input type="text" name="vehicletype" class="form-control" required>
-    </div>
+    <h4 class="header-title">Service Request Form</h4>
 
-    <div class="form-group">
-        <label class="col-form-label">Vehicle Model</label>
-        <input type="text" name="vehilemodel" class="form-control" required>
-    </div>
+    <?php if($msg != ''): ?>
+        <p style="color:green;"><?php echo $msg; ?></p>
+    <?php endif; ?>
 
-    <div class="form-group">
-        <label class="col-form-label">Registration No</label>
-        <input type="text" name="vehicleregno" class="form-control" required>
-    </div>
+    <form method="post">
+        <div class="form-group">
+            <label>Vehicle Type</label>
+            <input type="text" name="vehicletype" class="form-control" required>
+        </div>
 
-    <div class="form-group">
-        <label class="col-form-label">Service</label>
-        <select name="service" class="form-control" required>
-            <option value="">Select Service</option>
-            <?php
-            $q = mysqli_query($con,"SELECT * FROM services");
-            while($r = mysqli_fetch_array($q)){
-                echo "<option value='{$r['service_id']}'>{$r['service_name']}</option>";
-            }
-            ?>
-        </select>
-    </div>
+        <div class="form-group">
+            <label>Vehicle Model</label>
+            <input type="text" name="vehiclemodel" class="form-control" required>
+        </div>
 
-    <div class="form-group">
-        <label class="col-form-label">City</label>
-        <select name="city" class="form-control" required>
-            <option value="">Select City</option>
-            <?php
-            $q = mysqli_query($con,"SELECT * FROM city");
-            while($r = mysqli_fetch_array($q)){
-                echo "<option value='{$r['city_id']}'>{$r['city_name']}</option>";
-            }
-            ?>
-        </select>
-    </div>
+        <div class="form-group">
+            <label>Registration No</label>
+            <input type="text" name="vehicleregno" class="form-control" required>
+        </div>
 
-    <div class="form-group">
-        <label class="col-form-label">Landmark / Pickup Location</label>
-        <input type="text" name="pickupadd" class="form-control" required>
-    </div>
+        <div class="form-group">
+            <label>Service</label>
+            <select name="service" class="form-control" required>
+                <option value="">Select Service</option>
+                <?php
+                $q = mysqli_query($con,"SELECT * FROM services");
+                while($r = mysqli_fetch_assoc($q)){
+                    echo "<option value='{$r['service_id']}'>{$r['service_name']}</option>";
+                }
+                ?>
+            </select>
+        </div>
 
-    <div class="form-group text-center">
-        <button type="submit" name="submit" class="btn btn-info">Submit Request</button>
-    </div>
-</form>
+        <div class="form-group">
+            <label>City</label>
+            <select name="city" class="form-control" required>
+                <option value="">Select City</option>
+                <?php
+                $q = mysqli_query($con,"SELECT * FROM city");
+                while($r = mysqli_fetch_assoc($q)){
+                    echo "<option value='{$r['city_id']}'>{$r['city_name']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Landmark / Pickup Location</label>
+            <input type="text" name="pickupadd" class="form-control" required>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" name="submit" class="btn btn-info">Submit Request</button>
+        </div>
+    </form>
 </div>
 </div>
 </div>
@@ -169,8 +253,6 @@ footer {margin-top:auto; padding:12px 0; text-align:center; font-size:13px; colo
 </div>
 </div>
 
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

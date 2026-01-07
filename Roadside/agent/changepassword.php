@@ -37,8 +37,94 @@ if (isset($_POST['submit'])) {
 <head>
 <meta charset="UTF-8">
 <title>Change Password | RSA Nepal</title>
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+    <style>
+/* Main content spacing to match sidebar and header */
+.main-content {
+    margin-left: 260px; /* sidebar width */
+    margin-top: 60px;   /* header height */
+    padding: 30px;
+    min-height: 100vh;
+    background: #f3f4f6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Page Title */
+.main-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+/* Form Card */
+.main-content form {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    max-width: 500px;
+}
+
+/* Form Labels */
+.main-content label {
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Form Inputs */
+.main-content input.form-control {
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.main-content input.form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+    outline: none;
+}
+
+/* Submit Button */
+.main-content button.btn-primary {
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.main-content button.btn-primary:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+}
+
+/* Message */
+.main-content p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .main-content form {
+        width: 100%;
+        padding: 20px;
+    }
+}
+</style>
+
+    </style>
 <script type="text/javascript">
 function checkpass() {
     if (document.changepassword.newpassword.value != document.changepassword.confirmpassword.value) {
@@ -82,7 +168,5 @@ function checkpass() {
     </form>
 </div>
 
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

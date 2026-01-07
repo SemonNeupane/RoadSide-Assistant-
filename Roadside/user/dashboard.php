@@ -1,21 +1,27 @@
 <?php
 session_start();
 
-// Include centralized DB connection
-include(__DIR__ . '/../includes/dbconnection.php'); // Roadside/includes/dbconnection.php
+// Include DB
+include(__DIR__ . '/../includes/dbconnection.php');
 
-// Check login and role
-if (empty($_SESSION['sid']) || $_SESSION['role'] != 'user') {
-    header('Location: ../login.php'); // redirect to login page inside Roadside/
+// ✅ Correct session check
+if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
+    header('Location: ../login.php');
     exit();
 }
 
-$uid = intval($_SESSION['sid']);
+$uid = intval($_SESSION['user_id']);
 
 // Fetch user info
-$userQuery = mysqli_query($con, "SELECT * FROM users WHERE user_id='$uid'");
+$userQuery = mysqli_query($con, "SELECT * FROM users WHERE user_id='$uid' LIMIT 1");
 $user = mysqli_fetch_assoc($userQuery);
+
+if (!$user) {
+    header("location:../logout.php");
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,9 +175,7 @@ $user = mysqli_fetch_assoc($userQuery);
         <?php include(__DIR__ . '/includes/header.php'); ?>
         
 
-        <div class="card">
-            <h3>Welcome Back, <?php echo htmlspecialchars($user['username']); ?> 👋</h3>
-        </div>
+       
 
         <div class="dashboard-row">
             <?php
