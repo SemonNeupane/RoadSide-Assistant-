@@ -114,7 +114,7 @@ table th{background:#f1f5f9;color:#1f2937;}
             <div class="admin-dropdown-menu">
                 <a href="profile.php">My Profile</a>
                 <a href="changepassword.php">Change Password</a>
-                <a href="../logout.php">Logout</a>
+                <a href="/RoadSide-Assistant-/Roadside/admin/logout.php">Logout</a>
             </div>
         </div>
     </div>

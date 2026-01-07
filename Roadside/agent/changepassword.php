@@ -38,7 +38,6 @@ if (isset($_POST['submit'])) {
 <meta charset="UTF-8">
 <title>Change Password | RSA Nepal</title>
 <style>
-    <style>
 /* Main content spacing to match sidebar and header */
 .main-content {
     margin-left: 260px; /* sidebar width */

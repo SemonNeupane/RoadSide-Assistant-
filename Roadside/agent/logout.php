@@ -2,6 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: ../login.php"); // redirect to login page
-exit();
-?>
+
+// Since logout.php is inside 'agent' folder, we need to go one folder up to 'Roadside'
+header("Location: ../login.php"); 
+exit;
