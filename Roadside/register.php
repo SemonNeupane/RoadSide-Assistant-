@@ -63,13 +63,15 @@ body {
     padding: 0;
 }
 .container {
-    max-width: 400px;
+    width: 90%;
+    max-width: 550px;
     margin: 80px auto;
     background: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
 h2 {
     text-align: center;
     color: #007bff;

@@ -96,7 +96,7 @@ body{
 }
 
 .login-box{
-    width:380px;
+    width: 500px;
     background:#fff;
     padding:30px;
     border-radius:12px;
