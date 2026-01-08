@@ -38,7 +38,7 @@ $cities = mysqli_query($con, "
 .main-content h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
+    color: #203A4A;
     margin-bottom: 20px;
 }
 
@@ -58,7 +58,7 @@ $cities = mysqli_query($con, "
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: 500;
-    color: #1f2937;
+    color: #203A4A;
     border-radius: 10px;
     background: #e0e7ff;
     transition: all 0.2s ease;

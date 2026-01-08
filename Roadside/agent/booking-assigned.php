@@ -45,7 +45,7 @@ $assigned_bookings = mysqli_query($con, "
 h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
+    color: #203a4a;
     margin-bottom: 20px;
 }
 

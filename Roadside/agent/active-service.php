@@ -49,7 +49,7 @@ $active_services = mysqli_query($con, "
 .main-content h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
+    color: #203a4a;
     margin-bottom: 20px;
 }
 

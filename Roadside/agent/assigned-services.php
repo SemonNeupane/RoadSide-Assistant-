@@ -42,7 +42,7 @@ $services = mysqli_query($con, "
 .main-content h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #1f2937;
+    color: #203a4a;
     margin-bottom: 20px;
 }
 
@@ -62,7 +62,7 @@ $services = mysqli_query($con, "
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: 500;
-    color: #1f2937;
+    color: #203a4a;
     border-radius: 10px;
     background: #e0e7ff;
     transition: all 0.2s ease;

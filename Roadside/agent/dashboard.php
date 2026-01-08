@@ -137,7 +137,7 @@ table th { background:#f1f5f9; color:#1f2937; }
             <div class="agent-dropdown-menu">
                 <a href="profile.php">My Profile</a>
                 <a href="changepassword.php">Change Password</a>
-                <a href="../logout.php">Logout</a>
+                <a href="/RoadSide-Assistant-/Roadside/agent/logout.php">Logout</a>
             </div>
         </div>
     </div>
@@ -188,7 +188,7 @@ table th { background:#f1f5f9; color:#1f2937; }
 .dashboard-cards .card h3 {
     font-size: 18px;
     margin-bottom: 15px;
-    color: #1f2937;
+    color: #203A4A;
 }
 
 /* Circle for numbers */
