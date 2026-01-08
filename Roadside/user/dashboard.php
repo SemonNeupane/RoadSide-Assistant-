@@ -71,7 +71,7 @@ if (!$user) {
 
 .card h3 {
     font-size: 20px;
-    color: #1f2937;
+    color: #203A4A;
 }
 
 /* Dashboard Grid */

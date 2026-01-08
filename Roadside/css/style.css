@@ -15,7 +15,7 @@ body {
 
 /* === HEADER === */
 .header {
-    background-color: #0b2e59;
+    background-color: rgba(32,58,74);
     color: #fff;
     padding: 18px 50px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
@@ -33,7 +33,7 @@ body {
 .logo {
     font-size: 1.7rem;
     font-weight: 700;
-    color: #ffc107;
+    color: #0A924E;
     letter-spacing: 1px;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #ffc107;
+    color: #0A924E;
 }
 
 /* === HERO SECTION === */
@@ -93,8 +93,8 @@ body {
 
 .cta-button {
     padding: 12px 35px;
-    background-color: #ffc107;
-    color: #111;
+    background-color: rgb(10,146,78); /* primary green */
+    color: #fff; /* white text looks better on green */
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -103,9 +103,10 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #ffce33;
+    background-color: rgb(32,58,74); /* primary blue on hover */
     transform: scale(1.05);
 }
+
 
 /* === ICONS SECTION === */
 .vehicle-icons {
@@ -212,7 +213,7 @@ textarea {
 .location-btn {
     margin-top: 10px;
     padding: 8px 15px;
-    background-color: #ffc107;
+    background-color:#0A924E;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -222,7 +223,7 @@ textarea {
 }
 
 .location-btn:hover {
-    background-color: #ffce33;
+    background-color: #0A924E;
 }
 
 /* === FOOTER === */
@@ -242,7 +243,7 @@ textarea {
 }
 
 .footer h3 {
-    color: #ffc107;
+    color: #0A924E;
     margin-bottom: 15px;
 }
 
@@ -254,7 +255,7 @@ textarea {
 }
 
 .footer a:hover {
-    color: #ffc107;
+    color: #0A924E;
 }
 
 .footer-links ul {

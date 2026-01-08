@@ -10,7 +10,7 @@
     
     <header class="header">
         <nav class="nav">
-            <div class="logo">RSA Nepal</div>
+            <div class="logo" style="color: rgb(10,146,78);">RSA Nepal</div>
             <div class="nav-links">
                 <a href="#" class="nav-link" onclick="showHome()">Home</a>
                 <a href="register.php" class="nav-link" onclick="showSignup()"> Signup</a>
@@ -108,7 +108,7 @@
             <div class="container">
                 <div class="section-title">
                     <h2 style="color: white;">Quick Service Request</h2>
-                    <p class="section-subtitle" style="color: #ffc107;">Get help in just a few clicks</p>
+                    <p class="section-subtitle" style="color: #0A924E;">Get help in just a few clicks</p>
                 </div>
                 
                 <form class="request-form" id="quick-request-form">

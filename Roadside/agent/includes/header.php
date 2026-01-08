@@ -14,8 +14,14 @@ if (empty($_SESSION['agent_id'])) {
 
 $agent_id = $_SESSION['agent_id'];
 
-// Fetch agent name from users table
-$ret = mysqli_query($con, "SELECT username FROM users WHERE user_id='$agent_id' AND role='agent'");
+// Correct query to fetch agent's username
+$ret = mysqli_query($con, "
+    SELECT u.username
+    FROM users u
+    JOIN agent a ON u.user_id = a.user_id
+    WHERE a.agent_id='$agent_id'
+    LIMIT 1
+");
 $row = mysqli_fetch_assoc($ret);
 $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
 ?>
@@ -31,8 +37,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
             <div class="agent-dropdown-menu" id="agentDropdownMenu">
                 <a href="profile.php">My Profile</a>
                 <a href="changepassword.php">Change Password</a>
-               <a href="../logout.php">Logout</a>
-
+                <a href="../logout.php">Logout</a>
             </div>
         </div>
     </div>
@@ -46,7 +51,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
     left: 260px; /* matches sidebar width */
     right: 0;
     height: 60px;
-    background: #1f2937;
+    background: rgba(32,58,74);
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -87,7 +92,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
     right: 0;
     top: 50px;
     background: #fff;
-    color: #1f2937;
+    color: rgba(32,58,74);
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     min-width: 160px;
@@ -99,7 +104,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
     display: block;
     padding: 10px 15px;
     text-decoration: none;
-    color: #1f2937;
+    color: rgba(32,58,74);
     font-size: 14px;
     transition: background 0.2s;
 }

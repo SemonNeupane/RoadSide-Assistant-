@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 .main-content h3 {
     font-size: 22px;
     font-weight: 600;
-    color: #1f2937;
+    color: #203a4a;
     margin-bottom: 20px;
 }
 
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 
 .main-content input.form-control:focus {
     border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+    box-shadow: 0 0 0 2px rgb(32,58,274);
     outline: none;
 }
 
