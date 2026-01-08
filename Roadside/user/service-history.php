@@ -23,102 +23,22 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
 
 <style>
 :root {
-    --sidebar-width: 260px; /* same as your sidebar */
-    --header-height: 60px;  /* same as your header */
+    --sidebar-width: 260px;
+    --header-height: 60px;
 }
-
-/* ===== MAIN CONTENT AREA ===== */
-.content {
-    margin-left: var(--sidebar-width);
-    margin-top: var(--header-height);
-    padding: 25px;
-    min-height: 100vh;
-    background: #f3f4f6; /* light background like user dashboard */
-}
-
-/* ===== CARD BOX ===== */
-.card-box {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-/* CARD TITLE */
-.card-box h4 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #0f172a;
-}
-
-/* ===== TABLE STYLING ===== */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table th,
-.table td {
-    padding: 12px 15px;
-    font-size: 14px;
-    color: #334155;
-    text-align: left;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.table th {
-    background: #f1f5f9;
-    font-weight: 600;
-}
-
-.table tbody tr:hover {
-    background: rgba(56, 189, 248, 0.1);
-    transition: background 0.3s;
-}
-
-.table a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.table a:hover {
-    text-decoration: underline;
-}
-
-/* ===== BADGES ===== */
-.badge-success {
-    background: #22c55e;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: 12px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.badge-secondary {
-    background: #6b7280;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: 12px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-/* ===== RESPONSIVE ===== */
-.table-responsive {
-    overflow-x: auto;
-    margin-top: 15px;
-}
-
-@media (max-width: 991px) {
-    .content {
-        margin-left: 0;
-        padding: 15px;
-    }
-}
-
+.content { margin-left: var(--sidebar-width); margin-top: var(--header-height); padding: 25px; min-height: 100vh; background: #f3f4f6; }
+.card-box { background: #fff; padding: 25px; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+.card-box h4 { font-size: 20px; font-weight: 600; margin-bottom: 20px; color: #0f172a; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 12px 15px; font-size: 14px; color: #334155; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.table th { background: #f1f5f9; font-weight: 600; }
+.table tbody tr:hover { background: rgba(56, 189, 248, 0.1); transition: background 0.3s; }
+.table a { color: #2563eb; text-decoration: none; font-weight: 500; }
+.table a:hover { text-decoration: underline; }
+.badge-success { background: #22c55e; color: #fff; padding: 4px 10px; font-size: 12px; border-radius: 8px; font-weight: 500; }
+.badge-secondary { background: #6b7280; color: #fff; padding: 4px 10px; font-size: 12px; border-radius: 8px; font-weight: 500; }
+.table-responsive { overflow-x: auto; margin-top: 15px; }
+@media (max-width: 991px) { .content { margin-left: 0; padding: 15px; } .card-box { padding: 20px; } }
 </style>
 </head>
 
@@ -147,7 +67,6 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
                                         <th>#</th>
                                         <th>Service</th>
                                         <th>Vehicle Model</th>
-                                        <th>Registration</th>
                                         <th>Request Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -160,10 +79,9 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
                                     $query = "
                                     SELECT 
                                         b.booking_id,
-                                        b.created_at,
+                                        b.created_at AS request_date,
                                         b.status,
                                         v.model,
-                                        v.registration_no,
                                         s.service_name
                                     FROM booking b
                                     LEFT JOIN vehicle v ON b.vehicle_id = v.vehicle_id
@@ -175,7 +93,7 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
                                     $q = mysqli_query($con, $query);
 
                                     if(!$q){
-                                        echo "<tr><td colspan='7' class='text-danger'>Query Error: ".mysqli_error($con)."</td></tr>";
+                                        echo "<tr><td colspan='6' class='text-danger'>Query Error: ".mysqli_error($con)."</td></tr>";
                                     } elseif(mysqli_num_rows($q) > 0){
                                         while($row = mysqli_fetch_assoc($q)){
                                             ?>
@@ -183,8 +101,7 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
                                                 <td><?php echo $cnt;?></td>
                                                 <td><?php echo htmlentities($row['service_name'] ?? 'N/A');?></td>
                                                 <td><?php echo htmlentities($row['model'] ?? 'N/A');?></td>
-                                                <td><?php echo htmlentities($row['registration_no'] ?? 'N/A');?></td>
-                                                <td><?php echo htmlentities($row['created_at']);?></td>
+                                                <td><?php echo htmlentities(date('d M Y', strtotime($row['request_date'])));?></td>
                                                 <td>
                                                     <span class="badge badge-<?php echo ($row['status']=='active')?'success':'secondary';?>">
                                                         <?php echo ucfirst($row['status']);?>
@@ -200,7 +117,7 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
                                             $cnt++;
                                         }
                                     } else{
-                                        echo "<tr><td colspan='7' class='text-center text-muted'>No Service History Found</td></tr>";
+                                        echo "<tr><td colspan='6' class='text-center text-muted'>No Service History Found</td></tr>";
                                     }
                                     ?>
                                 </tbody>
