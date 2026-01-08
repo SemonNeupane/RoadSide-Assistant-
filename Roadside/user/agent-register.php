@@ -4,20 +4,19 @@ include(__DIR__ . '/../includes/dbconnection.php');
 
 $msg = '';
 
-
-if(isset($_POST['register'])){
+if (isset($_POST['register'])) {
 
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $email    = mysqli_real_escape_string($con, $_POST['email']);
     $phone    = mysqli_real_escape_string($con, $_POST['phone']);
-    $password = md5($_POST['password']); // keep md5 as per your login system
+    $password = md5($_POST['password']); // keep md5 as per your system
     $role     = $_POST['role']; // user OR agent
     $status   = 'active';
     $reg_date = date('Y-m-d');
 
     // Check duplicate email or phone
     $check = mysqli_query($con, "SELECT user_id FROM users WHERE email='$email' OR phone='$phone'");
-    if(mysqli_num_rows($check) > 0){
+    if (mysqli_num_rows($check) > 0) {
         $msg = "Email or phone already registered!";
     } else {
 
@@ -27,19 +26,19 @@ if(isset($_POST['register'])){
             VALUES ('$username','$email','$password','$phone','$role','$reg_date','$status')
         ");
 
-        if($insertUser){
+        if ($insertUser) {
 
             $user_id = mysqli_insert_id($con);
 
             // If role is AGENT → insert into agent table
-            if($role === 'agent'){
+            if ($role === 'agent') {
                 mysqli_query($con, "
                     INSERT INTO agent (user_id,status,approved_date,disabled_remarks)
                     VALUES ('$user_id','active',NOW(),'')
                 ");
             }
 
-            $msg = "Registration successful! <a href='login.php'>Login here</a>";
+            $msg = "Registration successful! <a href='../login.php'>Login here</a>";
         } else {
             $msg = "Error inserting user data!";
         }
@@ -87,7 +86,7 @@ input[type="tel"],
 select {
     padding: 10px;
     margin-bottom: 15px;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
 }
@@ -95,11 +94,10 @@ input[type="submit"] {
     padding: 12px;
     background: #007bff;
     color: #fff;
-    border:none;
+    border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 input[type="submit"]:hover {
     background: #0056b3;
@@ -113,28 +111,22 @@ input[type="submit"]:hover {
 .success {
     color: green;
 }
-/* Footer text under form */
 .m-t-50 {
     margin-top: 50px;
 }
-
 .text-muted {
-    color: #6b7280; /* gray text */
+    color: #6b7280;
     font-size: 14px;
 }
-
 .text-muted a {
-    color: #38bdf8; /* blue link for Sign In */
+    color: #38bdf8;
     text-decoration: none;
     font-weight: 600;
     margin-left: 5px;
-    transition: color 0.3s ease;
 }
-
 .text-muted a:hover {
-    color: #0ea5e9; /* darker blue on hover */
+    color: #0ea5e9;
 }
-
 </style>
 </head>
 
@@ -143,15 +135,14 @@ input[type="submit"]:hover {
 <div class="container">
     <h2>Register</h2>
 
-    <?php 
-    if($msg != ''){ 
+    <?php
+    if ($msg != '') {
         $class = (strpos($msg, 'successful') !== false) ? 'success' : '';
         echo "<p class='msg $class'>$msg</p>";
-    } 
+    }
     ?>
 
     <form method="post">
-
         <label>Username</label>
         <input type="text" name="username" required>
 
@@ -164,7 +155,6 @@ input[type="submit"]:hover {
         <label>Password</label>
         <input type="password" name="password" required>
 
-        <!-- ROLE SELECTION -->
         <label>Register As</label>
         <select name="role" required>
             <option value="">Select Role</option>
@@ -173,14 +163,14 @@ input[type="submit"]:hover {
         </select>
 
         <input type="submit" name="register" value="Register">
-
     </form>
-      <div class="row m-t-50">
-                                <div class="col-sm-12 text-center">
-                                    <p class="text-muted">Already have an account?  <a href="/RoadSide-Assistant--master/RSAM/Roadside/login.php" class="text-dark m-l-5"><b>Sign In</b></a></p>
-                                </div>
-                            </div>
 
+    <div class="m-t-50 text-center">
+        <p class="text-muted">
+            Already have an account?
+            <a href="../login.php"><b>Sign In</b></a>
+        </p>
+    </div>
 </div>
 
 </body>
