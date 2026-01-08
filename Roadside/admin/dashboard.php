@@ -186,6 +186,6 @@ document.getElementById('adminDropdown').addEventListener('click', function() {
     this.classList.toggle('active');
 });
 </script>
-
+<?php include('includes/footer.php'); ?>
 </body>
 </html>

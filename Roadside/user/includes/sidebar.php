@@ -75,7 +75,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'User';
                     </a>
                 </li>
                 <li>
-                    <a href="/roadside/register.php">
+                    <a href="/RoadSide-Assistant--master/RSAM/Roadside/register.php">
                         <span>Be an Agent</span>
                     </a>
                 </li>
