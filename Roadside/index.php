@@ -27,7 +27,7 @@
     <img class="slider" src="assets/images/image.png" alt="Roadside Assistance">
 
     <div class="hero-content">
-        <h1>Roadside Assistance<br>Management System</h1>
+        <h1>Roadside Assistant<br>Vehicle Service System</h1>
         <p>24/7 Emergency vehicle support across Nepal. Get help when you need it most with our verified network of professional agents.</p>
 
         <!-- FIXED BUTTON -->

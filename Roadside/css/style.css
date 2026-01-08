@@ -193,7 +193,7 @@ body {
 
 /* === FOOTER (STICKY FIXED) === */
 .footer {
-    background-color: #0b2e59;
+    background-color: rgba(32,58,74);
     color: #fff;
     padding: 70px 20px 40px;
     margin-top: auto; /* THIS makes it stick to bottom */
