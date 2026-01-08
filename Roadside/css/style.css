@@ -6,11 +6,17 @@
     scroll-behavior: smooth;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     background-color: #f9fafc;
     color: #222;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
 }
 
 /* === HEADER === */
@@ -76,7 +82,7 @@ body {
     text-align: center;
     color: #fff;
     width: 80%;
-    animation: fadeIn 1.8s ease;
+    animation: fadeIn 1.5s ease;
 }
 
 .hero-content h1 {
@@ -93,34 +99,24 @@ body {
 
 .cta-button {
     padding: 12px 35px;
-    background-color: rgb(10,146,78); /* primary green */
-    color: #fff; /* white text looks better on green */
+    background-color: #0A924E;
+    color: #fff;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .cta-button:hover {
-    background-color: rgb(32,58,74); /* primary blue on hover */
-    transform: scale(1.05);
-}
-
-
-/* === ICONS SECTION === */
-.vehicle-icons {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    font-size: 2.2rem;
-    margin: 40px 0;
-    animation: fadeInUp 1s ease;
+    background-color: #203a4a;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 /* === SERVICES SECTION === */
 .services {
-    padding: 70px 20px;
+    padding: 80px 20px;
     background-color: #fff;
 }
 
@@ -130,7 +126,7 @@ body {
 }
 
 .section-title h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #0b2e59;
     margin-bottom: 10px;
 }
@@ -148,90 +144,59 @@ body {
     margin: 0 auto;
 }
 
+/* 🔥 SMOOTH HOVER ANIMATION */
 .service-card {
     background-color: #f1f5f9;
-    border-radius: 15px;
-    padding: 30px 20px;
+    border-radius: 18px;
+    padding: 35px 25px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0A924E, #0b2e59);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.service-card * {
+    position: relative;
+    z-index: 1;
+}
+
+.service-card:hover::before {
+    opacity: 1;
 }
 
 .service-card:hover {
-    background-color: #0b2e59;
     color: #fff;
-    transform: translateY(-7px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
 .service-icon {
-    font-size: 2.8rem;
+    font-size: 3rem;
     margin-bottom: 15px;
+    transition: transform 0.4s ease;
 }
 
-/* === QUICK REQUEST SECTION === */
-.quick-request {
-    background-color: #0b2e59;
-    padding: 80px 20px;
-    color: white;
+.service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
 }
 
-.request-form {
-    background-color: rgba(255,255,255,0.1);
-    padding: 40px;
-    border-radius: 15px;
-    backdrop-filter: blur(8px);
-    max-width: 900px;
-    margin: 0 auto;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.form-group label {
-    font-weight: 500;
-    color: #fff;
-}
-
-.form-control, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-}
-
-textarea {
-    resize: none;
-}
-
-.location-btn {
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color:#0A924E;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #111;
-    transition: 0.3s;
-}
-
-.location-btn:hover {
-    background-color: #0A924E;
-}
-
-/* === FOOTER === */
+/* === FOOTER (STICKY FIXED) === */
 .footer {
     background-color: #0b2e59;
     color: #fff;
     padding: 70px 20px 40px;
-    margin-top: 70px;
+    margin-top: auto; /* THIS makes it stick to bottom */
 }
 
 .footer-container {
@@ -268,19 +233,20 @@ textarea {
 
 .footer-social .social-icons {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .footer-social img {
     width: 28px;
     height: 28px;
     filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
+
 .footer-social img:hover {
-    transform: scale(1.1);
-    filter: invert(69%) sepia(67%) saturate(448%) hue-rotate(4deg) brightness(102%) contrast(101%);
+    transform: scale(1.2);
+    filter: brightness(0) saturate(100%) invert(32%) sepia(77%) saturate(403%) hue-rotate(91deg) brightness(95%) contrast(92%);
 }
 
 .footer-bottom {
@@ -294,13 +260,8 @@ textarea {
 
 /* === ANIMATIONS === */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translate(-50%, -40%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 /* === RESPONSIVE === */

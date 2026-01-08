@@ -81,12 +81,14 @@ if (isset($_POST['login'])) {
 <head>
 <meta charset="UTF-8">
 <title>RSA Nepal | Login</title>
+ <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
+    <link href="css/style.css" rel="stylesheet" />
 <style>
 body{
     margin:0;
     font-family: Arial, sans-serif;
-    background:#f3f4f6;
+    background:linear-gradient(135deg, #0f172a, #020617);;
     height:100vh;
     display:flex;
     justify-content:center;

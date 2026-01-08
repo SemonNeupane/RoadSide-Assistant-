@@ -6,7 +6,9 @@ JOIN services s ON b.service_id=s.service_id
 JOIN vehicle v ON b.vehicle_id=v.vehicle_id
 WHERE b.user_id='{$_SESSION['sid']}'");
 ?>
-<html><body><h3>My Bookings</h3>
+<html>
+    
+<body><h3>My Bookings</h3>
 <table border="1"><tr><th>ID</th><th>Service</th><th>Vehicle</th><th>Status</th><th>Landmark</th><th>Action</th></tr>
 <?php while($r=mysqli_fetch_assoc($res)){
 echo "<tr><td>{$r['booking_id']}</td><td>{$r['service_name']}</td><td>{$r['model']}</td><td>{$r['status']}</td>

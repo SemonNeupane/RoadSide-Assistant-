@@ -52,11 +52,13 @@ if(isset($_POST['register'])){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RSA Registration</title>
+ <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
+    <link href="css/style.css" rel="stylesheet" />
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
+    background: linear-gradient(135deg, #0f172a, #020617);;
     margin: 0;
     padding: 0;
 }

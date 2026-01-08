@@ -24,6 +24,7 @@ $ret = mysqli_query($con, "
 $row = mysqli_fetch_assoc($ret);
 $name = $row ? htmlspecialchars($row['username']) : 'User';
 ?>
+
 <div class="user-header">
     <div class="user-header-left">
         <h3>Welcome Back, <?php echo $name; ?> 👋</h3>
