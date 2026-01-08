@@ -25,9 +25,6 @@ if (!$user) {
 <title>RSA Nepal | User Dashboard</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; }
-
 /* Wrapper */
 #wrapper {
     display: flex;
@@ -46,7 +43,7 @@ if (!$user) {
 
 /* Main content wrapper */
 .content-wrapper {
-    margin-left: 240px;
+    margin-left: 240px; /* space for sidebar */
     width: calc(100% - 240px);
     display: flex;
     flex-direction: column;
@@ -59,26 +56,26 @@ if (!$user) {
     padding: 20px;
     background: #f3f4f6;
     overflow-y: auto;
+
+    /* Center dashboard widgets horizontally */
+    display: flex;
+    justify-content: center; /* horizontal center */
 }
 
-/* Header */
-.header {
-    background: #fff;
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* Dashboard widgets */
+/* Dashboard widgets container */
 .dashboard-row {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center; /* ensure widgets are centered in row */
 }
+
+/* Each widget column */
 .dashboard-col {
-    flex: 1 1 220px;
+    flex: 0 0 220px; /* fixed width, do not stretch */
 }
+
+/* Widget styling */
 .widget {
     background: #fff;
     border-radius: 12px;
@@ -90,6 +87,7 @@ if (!$user) {
 .widget:hover { transform: translateY(-6px); }
 .widget p { margin-top: 15px; font-size: 15px; font-weight: 500; color: #374151; }
 
+/* Circle inside widget */
 .circle {
     width: 80px;
     height: 80px;
@@ -117,7 +115,7 @@ if (!$user) {
     z-index: 10;
 }
 
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     #sidebar { width: 200px; }
     .content-wrapper { margin-left: 200px; width: calc(100% - 200px); }
@@ -125,7 +123,9 @@ if (!$user) {
 @media (max-width: 576px) {
     #sidebar { position: relative; width: 100%; height: auto; }
     .content-wrapper { margin-left: 0; width: 100%; }
+    .dashboard-col { flex: 1 1 100%; } /* full width widgets on mobile */
 }
+
 </style>
 </head>
 <body>

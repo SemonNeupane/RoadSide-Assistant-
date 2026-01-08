@@ -135,6 +135,16 @@ p[style*="color:red"] {
     color: #dc2626 !important; /* red alert color */
     margin-bottom: 15px;
 }
+footer {
+    width: calc(100% - 260px);
+    margin-left: 260px; /* align with sidebar */
+    background: #1e293b;
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 991px) {
@@ -183,7 +193,6 @@ p[style*="color:red"] {
     </div>
 </div>
 
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<?php include('includes/footer.php'); ?>
 </body>
 </html>

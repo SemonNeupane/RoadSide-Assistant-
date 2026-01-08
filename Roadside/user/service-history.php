@@ -38,6 +38,16 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
 .badge-success { background: #22c55e; color: #fff; padding: 4px 10px; font-size: 12px; border-radius: 8px; font-weight: 500; }
 .badge-secondary { background: #6b7280; color: #fff; padding: 4px 10px; font-size: 12px; border-radius: 8px; font-weight: 500; }
 .table-responsive { overflow-x: auto; margin-top: 15px; }
+footer {
+    margin-left: 260px; /* align with sidebar */
+    width: calc(100% - 260px);
+    background: #1e293b;
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+}
 @media (max-width: 991px) { .content { margin-left: 0; padding: 15px; } .card-box { padding: 20px; } }
 </style>
 </head>
@@ -132,6 +142,6 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
     </div>
 
 </div>
-
+<?php include('includes/footer.php'); ?>
 </body>
 </html>

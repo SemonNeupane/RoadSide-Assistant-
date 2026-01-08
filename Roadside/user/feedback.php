@@ -107,7 +107,16 @@ $result = mysqli_query($con, $query);
     transition: all 0.3s ease;
 }
 .btn-submit:hover { background: #0ea5e9; }
-
+footer {
+    margin-left: 260px; /* align with sidebar */
+    width: calc(100% - 260px);
+    background: #1e293b;
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+}
 /* Disabled message */
 .service-pending { color: #6b7280; font-size: 14px; }
 </style>
@@ -178,6 +187,7 @@ $(document).ready(function(){
     });
 });
 </script>
+<?php include('includes/footer.php'); ?>
 
 </body>
 </html>

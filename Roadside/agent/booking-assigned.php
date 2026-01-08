@@ -28,8 +28,7 @@ $assigned_bookings = mysqli_query($con, "
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assigned Bookings | RSA Nepal</title>
 
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+
 
 <style>
 /* Main Content */
@@ -45,7 +44,7 @@ $assigned_bookings = mysqli_query($con, "
 h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #203a4a;
+    color: #1f2937;
     margin-bottom: 20px;
 }
 
@@ -201,7 +200,6 @@ table tbody td span.inactive {
 
 </div>
 
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

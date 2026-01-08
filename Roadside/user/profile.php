@@ -125,7 +125,16 @@ $user = mysqli_fetch_assoc($ret);
 .btn-update:hover {
     background: linear-gradient(135deg, #1e40af, #0284c7);
 }
-
+footer {
+    margin-left: 260px; /* align with sidebar */
+    width: calc(100% - 260px);
+    background: #1e293b;
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+}
 /* RESPONSIVE */
 @media (max-width: 991px) {
     .content {
@@ -175,6 +184,7 @@ $user = mysqli_fetch_assoc($ret);
         </form>
     </div>
 </div>
+<?php include('includes/footer.php'); ?>
 
 </body>
 </html>
