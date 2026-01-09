@@ -64,8 +64,8 @@ $booking = mysqli_fetch_assoc($result);
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>RSA Nepal | Service Detail</title>
-
+<title> Service Detail</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <!-- Bootstrap -->
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="../assets/css/style.css" rel="stylesheet">

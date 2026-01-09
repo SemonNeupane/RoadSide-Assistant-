@@ -11,31 +11,14 @@ $result = mysqli_query($con, "SELECT a.agent_id, u.username, u.phone
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
 
-<div class="main-content" style="margin-left:260px; padding:20px; margin-top:60px;">
-    <h2>Pending Agents</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = mysqli_fetch_assoc($result)) { ?>
-            <tr>
-                <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
-                <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
-                <td data-label="Action">
-                    <a href="approve-agent.php?id=<?= $row['agent_id']; ?>" class="btn-action approve">Approve</a>
-                    <a href="reject-agent.php?id=<?= $row['agent_id']; ?>" class="btn-action reject">Reject</a>
-                </td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Agents | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <style>
 /* ===== MAIN CONTENT ===== */
 .main-content {
     margin-left: 260px; /* sidebar width */
@@ -156,5 +139,33 @@ a {
 
 </style>
 
+</head>
+<body>
+    <div class="main-content" style="margin-left:260px; padding:20px; margin-top:60px;">
+    <h2>Pending Agents</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($row = mysqli_fetch_assoc($result)) { ?>
+            <tr>
+                <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
+                <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
+                <td data-label="Action">
+                    <a href="approve-agent.php?id=<?= $row['agent_id']; ?>" class="btn-action approve">Approve</a>
+                    <a href="reject-agent.php?id=<?= $row['agent_id']; ?>" class="btn-action reject">Reject</a>
+                </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
 
 <?php include('includes/footer.php'); ?>

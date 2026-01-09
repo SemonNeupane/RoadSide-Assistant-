@@ -41,7 +41,8 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Change Password | RSA Nepal</title>
+<title>User Change Password </title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="../assets/css/style.css" rel="stylesheet">
 

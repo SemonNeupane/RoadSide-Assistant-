@@ -28,11 +28,8 @@ $active_services = mysqli_query($con, "
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Active Services | RSA Nepal</title>
-
-<!-- Bootstrap -->
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+<title>Agent Active Services</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 
 <style>
 /* Main Content */

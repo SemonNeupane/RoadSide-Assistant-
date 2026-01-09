@@ -31,6 +31,7 @@ if (isset($_SESSION['admin_id'])) {
 <head>
 <meta charset="utf-8">
 <title>RSA | Admin Login</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <style>
 body {
     font-family: Arial, sans-serif;

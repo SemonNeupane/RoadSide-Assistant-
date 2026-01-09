@@ -47,8 +47,8 @@ $user = mysqli_fetch_assoc($ret);
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>User Profile | RSA Nepal</title>
-
+<title>User Profile</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <style>
 /* ===== CONTENT ===== */
 .content {

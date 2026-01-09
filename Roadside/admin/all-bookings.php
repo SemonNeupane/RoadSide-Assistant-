@@ -20,7 +20,16 @@ $result = mysqli_query($con, "
 ");
 ?>
 
-<h2>All Bookings</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bookings | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+</head>
+<body>
+    <h2>All Bookings</h2>
 <table border="1" width="100%">
 <tr>
     <th>ID</th>
@@ -44,3 +53,6 @@ $result = mysqli_query($con, "
 
 
 </table>
+
+</body>
+</html>

@@ -22,10 +22,8 @@ $services = mysqli_query($con, "
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assigned Services | RSA Nepal</title>
-
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+<title>Agent Assigned Services </title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 
 <style>
 /* Main content spacing to avoid sidebar and header overlap */

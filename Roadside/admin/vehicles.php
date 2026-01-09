@@ -19,40 +19,14 @@ $result = mysqli_query($con, "
 ");
 ?>
 
-<div class="main-content">
-    <h2>User Vehicles</h2>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Vehicle Type</th>
-                    <th>Model</th>
-                    <th>Registration No</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                    <tr>
-                        <td data-label="ID"><?= $row['vehicle_id']; ?></td>
-                        <td data-label="User"><?= htmlspecialchars($row['username'] ?? 'N/A'); ?></td>
-                        <td data-label="Vehicle Type"><?= htmlspecialchars($row['vehicle_type']); ?></td>
-                        <td data-label="Model"><?= htmlspecialchars($row['model']); ?></td>
-                        <td data-label="Registration No"><?= htmlspecialchars($row['registration_no']); ?></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
- <?php include('includes/sidebar.php'); ?>
- <?php include('includes/header.php'); ?>
-</table>
-<?php include('includes/footer.php'); ?>
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Vehicles | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <style>
 
 :root {
     --sidebar-width: 260px; /* match your sidebar */
@@ -164,3 +138,41 @@ footer {
     }
 }
 </style>
+</head>
+<body>
+    <div class="main-content">
+    <h2>User Vehicles</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Vehicle Type</th>
+                    <th>Model</th>
+                    <th>Registration No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                        <td data-label="ID"><?= $row['vehicle_id']; ?></td>
+                        <td data-label="User"><?= htmlspecialchars($row['username'] ?? 'N/A'); ?></td>
+                        <td data-label="Vehicle Type"><?= htmlspecialchars($row['vehicle_type']); ?></td>
+                        <td data-label="Model"><?= htmlspecialchars($row['model']); ?></td>
+                        <td data-label="Registration No"><?= htmlspecialchars($row['registration_no']); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+ <?php include('includes/sidebar.php'); ?>
+ <?php include('includes/header.php'); ?>
+</table>
+<?php include('includes/footer.php'); ?>

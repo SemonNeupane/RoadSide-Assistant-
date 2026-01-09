@@ -36,7 +36,8 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Change Password | RSA Nepal</title>
+<title> Agent Change Password </title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <style>
 /* Main content spacing to match sidebar and header */
 .main-content {

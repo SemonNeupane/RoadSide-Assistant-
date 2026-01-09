@@ -43,6 +43,7 @@ $recent_bookings = mysqli_query($con, "SELECT b.booking_id, u.username AS user_n
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | RSA Nepal</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <link rel="stylesheet" href="../assets/css/fontawesome.css"> <!-- optional icons -->
 
 <style>

@@ -15,8 +15,8 @@ $rno = mt_rand(1000,9999);   // for URL encoding if needed
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>RSA Nepal | Service History</title>
-
+<title>User Service History</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <!-- Bootstrap -->
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="../assets/css/style.css" rel="stylesheet">

@@ -16,9 +16,16 @@ $q = mysqli_query($con,"
 ");
 ?>
 
-
-
-<h2>Active Bookings</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active-Bookings | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+</head>
+<body>
+    <h2>Active Bookings</h2>
 <table border="1" width="100%">
 <tr>
     <th>ID</th>
@@ -40,3 +47,7 @@ $q = mysqli_query($con,"
  <?php include('includes/sidebar.php'); ?>
  <?php include('includes/header.php'); ?> 
 </table>
+</body>
+</html>
+
+

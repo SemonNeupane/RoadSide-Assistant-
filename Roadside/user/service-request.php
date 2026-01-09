@@ -93,7 +93,8 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>RSA Nepal | Service Request</title>
+<title>User Service Request</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <style>
 :root { --sidebar-width: 260px; --header-height: 60px; }
 .content { margin-left: var(--sidebar-width); margin-top: var(--header-height); padding: 25px; min-height: 100vh; background: #f3f4f6; }

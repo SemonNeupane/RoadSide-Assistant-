@@ -29,8 +29,8 @@ $query = mysqli_query($con, "
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>User Feedback | Agent</title>
-
+<title>Agent Feedback</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <style>
 body {
     margin: 0;

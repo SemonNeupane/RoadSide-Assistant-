@@ -15,34 +15,13 @@ $result = mysqli_query($con, "
     WHERE role = 'user'
 ");
 ?>
-<div class="main-content">
-    <h2>Registered Users</h2>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Joined On</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                    <tr>
-                        <td data-label="ID"><?= $row['user_id']; ?></td>
-                        <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
-                        <td data-label="Email"><?= htmlspecialchars($row['email']); ?></td>
-                        <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
-                        <td data-label="Joined On"><?= $row['registration_date']; ?></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users | Admin</title>
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <style>
 :root {
     --sidebar-width: 260px;
@@ -154,6 +133,39 @@ footer {
     }
 }
 </style>
+</head>
+<body>
+    <div class="main-content">
+    <h2>Registered Users</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Joined On</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                        <td data-label="ID"><?= $row['user_id']; ?></td>
+                        <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
+                        <td data-label="Email"><?= htmlspecialchars($row['email']); ?></td>
+                        <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
+                        <td data-label="Joined On"><?= $row['registration_date']; ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
 
    
 

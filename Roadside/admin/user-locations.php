@@ -23,31 +23,14 @@ $q = mysqli_query($con, "
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
 
-<div class="main-content" style="margin-left:260px; padding:20px; margin-top:60px;">
-    <h2>User Locations</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Province</th>
-                <th>District</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($r = mysqli_fetch_assoc($q)) { ?>
-            <tr>
-                <td><?= htmlspecialchars($r['username']); ?></td>
-                <td><?= htmlspecialchars($r['province_name']); ?></td>
-                <td><?= htmlspecialchars($r['district_name']); ?></td>
-                <td><?= htmlspecialchars($r['city_name']); ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Locations | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <style>
     body {
     display: flex;
     flex-direction: column;
@@ -130,4 +113,33 @@ footer {
     }
 }
 </style>
+</head>
+<body>
+    <div class="main-content" style="margin-left:260px; padding:20px; margin-top:60px;">
+    <h2>User Locations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Province</th>
+                <th>District</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($r = mysqli_fetch_assoc($q)) { ?>
+            <tr>
+                <td><?= htmlspecialchars($r['username']); ?></td>
+                <td><?= htmlspecialchars($r['province_name']); ?></td>
+                <td><?= htmlspecialchars($r['district_name']); ?></td>
+                <td><?= htmlspecialchars($r['city_name']); ?></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
 <?php include('includes/footer.php'); ?>

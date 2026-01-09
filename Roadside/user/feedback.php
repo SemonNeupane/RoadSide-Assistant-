@@ -57,7 +57,8 @@ $result = mysqli_query($con, $query);
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>User Feedback | RSA Nepal</title>
+<title>User Feedback</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>

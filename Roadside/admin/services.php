@@ -12,32 +12,14 @@ $q = mysqli_query($con, "SELECT service_id, service_name, description FROM servi
 
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
-
-<div class="main-content">
-    <h2>Services List</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($r = mysqli_fetch_assoc($q)) { ?>
-            <tr>
-                <td data-label="ID"><?= $r['service_id'] ?></td>
-                <td data-label="Name"><?= htmlspecialchars($r['service_name']) ?></td>
-                <td data-label="Description"><?= htmlspecialchars($r['description']) ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-
-<?php include('includes/footer.php'); ?>
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <style>
 .main-content {
     margin-left: 260px; /* sidebar width */
     margin-top: 60px;   /* header height */
@@ -114,3 +96,33 @@ footer {
     }
 }
 </style>
+</head>
+<body>
+    <div class="main-content">
+    <h2>Services List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($r = mysqli_fetch_assoc($q)) { ?>
+            <tr>
+                <td data-label="ID"><?= $r['service_id'] ?></td>
+                <td data-label="Name"><?= htmlspecialchars($r['service_name']) ?></td>
+                <td data-label="Description"><?= htmlspecialchars($r['description']) ?></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+<?php include('includes/footer.php'); ?>
+
+

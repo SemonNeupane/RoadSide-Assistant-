@@ -21,31 +21,14 @@ $result = mysqli_query($con, "
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
 
-<div class="main-content">
-    <h2>Approved Agents</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = mysqli_fetch_assoc($result)) { ?>
-            <tr>
-                <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
-                <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
-                <td data-label="City"><?= htmlspecialchars($row['city_name'] ?? 'N/A'); ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-
-<?php include('includes/footer.php'); ?>
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Agents | Admin</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <style>
 /* ===== MAIN CONTENT ===== */
 .main-content {
     margin-left: 260px;  /* sidebar width */
@@ -129,3 +112,33 @@ footer {
     position: relative;
 }
 </style>
+</head>
+<body>
+    <div class="main-content">
+    <h2>Approved Agents</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($row = mysqli_fetch_assoc($result)) { ?>
+            <tr>
+                <td data-label="Name"><?= htmlspecialchars($row['username']); ?></td>
+                <td data-label="Phone"><?= htmlspecialchars($row['phone']); ?></td>
+                <td data-label="City"><?= htmlspecialchars($row['city_name'] ?? 'N/A'); ?></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+
+<?php include('includes/footer.php'); ?>
+
+

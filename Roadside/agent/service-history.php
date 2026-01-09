@@ -26,8 +26,8 @@ $completed_services = mysqli_query($con, "
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Service History | RSA Nepal</title>
-
+<title>Agent Service History</title>
+<link rel="icon" type="image/x-icon" href="../../favicon.ico">
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="../assets/css/style.css" rel="stylesheet">
 

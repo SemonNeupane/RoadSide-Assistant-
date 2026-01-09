@@ -12,19 +12,14 @@ $result = mysqli_query($con, "SELECT * FROM province");
 ?>
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
-
-<div class="main-content">
-    <h2>Provinces</h2>
-    <ul>
-        <?php while($p = mysqli_fetch_assoc($result)) { ?>
-            <li><?= htmlspecialchars($p['province_name']); ?></li>
-        <?php } ?>
-    </ul>
-</div>
-
-<?php include('includes/footer.php'); ?>
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Province | Admin</title>
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+     <style>
 .main-content {
     margin-left: 260px; /* width of sidebar */
     margin-top: 60px;   /* height of header */
@@ -57,3 +52,20 @@ footer {
     font-size: 13px;
 }
 </style>
+</head>
+<body>
+    <div class="main-content">
+    <h2>Provinces</h2>
+    <ul>
+        <?php while($p = mysqli_fetch_assoc($result)) { ?>
+            <li><?= htmlspecialchars($p['province_name']); ?></li>
+        <?php } ?>
+    </ul>
+</div>
+</body>
+</html>
+
+
+<?php include('includes/footer.php'); ?>
+
+
