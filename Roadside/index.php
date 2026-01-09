@@ -8,36 +8,42 @@
     <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
-    <link href="css/style.css" rel="stylesheet" />
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+<!-- ================= HEADER ================= -->
 <header class="header">
     <nav class="nav">
-        <div class="logo" style="color: rgb(10,146,78);">RSA Nepal</div>
+        <div class="logo">RSA Nepal</div>
         <div class="nav-links">
-            <a href="#" class="nav-link" onclick="showHome()">Home</a>
-            <a href="register.php" class="nav-link" onclick="showSignup()"> Signup</a>
+            <a href="#" class="nav-link">Home</a>
+            <a href="register.php" class="nav-link">Signup</a>
             <a href="login.php" class="nav-link">Signin</a>
         </div>
     </nav>
 </header>
 
+<!-- ================= HERO SECTION ================= -->
 <div class="img1">
     <img class="slider" src="assets/images/image.png" alt="Roadside Assistance">
 
+    <!-- Optional overlay for readability -->
+    <div class="hero-overlay"></div>
+
+    <!-- Hero Content -->
     <div class="hero-content">
         <h1>Roadside Assistant<br>Vehicle Service System</h1>
-        <p>24/7 Emergency vehicle support across Nepal. Get help when you need it most with our verified network of professional agents.</p>
-
-        <!-- FIXED BUTTON -->
+        <p>
+            24/7 Emergency vehicle support across Nepal. Get help when you need it most with our verified network of professional agents.
+        </p>
         <button class="cta-button" onclick="location.href='register.php'">Get Help Now</button>
     </div>
 </div>
 
-<div id="home-page">
-
-<section id="services" class="services">
+<!-- ================= SERVICES ================= -->
+<section class="services">
     <div class="container">
         <div class="section-title">
             <h2>Our Services</h2>
@@ -84,11 +90,9 @@
     </div>
 </section>
 
-</div>
-
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
     <div class="footer-container">
-
         <div class="footer-about">
             <h3>RSA Nepal</h3>
             <p>Reliable 24/7 roadside assistance across Nepal. We connect you with trusted local agents to ensure your safety and mobility anytime, anywhere.</p>
@@ -97,10 +101,10 @@
         <div class="footer-links">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="#" onclick="showHome()">Home</a></li>
-                <li><a href="#" onclick="showSignup()">Signup</a></li>
-                <li><a href="#" onclick="showSignin()">Signin</a></li>
-                <li><a href="#" onclick="showAdminLogin()">Admin</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="register.php">Signup</a></li>
+                <li><a href="login.php">Signin</a></li>
+                <li><a href="#">Admin</a></li>
             </ul>
         </div>
 
@@ -119,7 +123,6 @@
                 <a href="#"><img src="assets/icons/twitter.png" alt="Twitter"></a>
             </div>
         </div>
-
     </div>
 
     <div class="footer-bottom">
