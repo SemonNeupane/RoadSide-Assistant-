@@ -34,9 +34,7 @@ if ($admin_id) {
             <span><?php echo htmlspecialchars($name); ?> ▼</span>
 
             <div class="admin-dropdown-menu" id="adminDropdownMenu">
-                <a href="profile.php">My Profile</a>
-                <a href="changepassword.php">Change Password</a>
-                <a href="../logout.php">Logout</a>
+                <a href="/RoadSide-Assistant-/Roadside/admin/logout.php">Logout</a>
             </div>
         </div>
     </div>

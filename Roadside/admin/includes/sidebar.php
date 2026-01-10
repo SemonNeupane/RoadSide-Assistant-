@@ -12,6 +12,13 @@
 //     exit();
 // }
 
+if (!isset($_SESSION['admin_id'])) {
+    header('location:/index.php');
+    exit();
+}
+
+$admin_id = $_SESSION['admin_id'];
+
 $admin_id = $_SESSION['admin_id'];
 
 // Fetch admin name
@@ -118,11 +125,11 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Admin';
                 </li>
 
                 <!-- Logout -->
-                <li>
+                <!-- <li>
                     <a href="../logout.php">
                         <span>Logout</span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </div>

@@ -1,21 +1,16 @@
 <?php
 session_start();
 include('../includes/dbconnection.php');
-
-// Admin authentication
 if (empty($_SESSION['admin_id'])) {
-    header('location:index.php');
+    header('location:/index.php');
     exit();
 }
+$msg = '';
 
-// Fetch all agent services with agent name, service name, and city
-$result = mysqli_query($con, "
-    SELECT 
-        asv.agent_service_id,
-        u.username AS agent_name,
-        s.service_name,
-        c.city_name
-    FROM agent_service asv
+// Fetch all agent services
+$query = mysqli_query($con, "
+    SELECT asv.agent_service_id, u.username AS agent_name, s.service_name, c.city_name
+    FROM agent_service as asv
     JOIN agent a ON asv.agent_id = a.agent_id
     JOIN users u ON a.user_id = u.user_id
     JOIN services s ON asv.service_id = s.service_id
@@ -25,124 +20,30 @@ $result = mysqli_query($con, "
 ");
 ?>
 
+<h2>Agent Services</h2>
+<a href="add-agent-service.php">Add New Agent Service</a>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Agent Name</th>
+            <th>Service</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while($row = mysqli_fetch_assoc($query)) { ?>
+            <tr>
+                <td><?php echo htmlspecialchars($row['agent_name']); ?></td>
+                <td><?php echo htmlspecialchars($row['service_name']); ?></td>
+                <td><?php echo htmlspecialchars($row['city_name']); ?></td>
+                <td>
+                    <a href="edit-agent-service.php?id=<?php echo $row['agent_service_id']; ?>">Edit</a> |
+                    <a href="delete-agent-service.php?id=<?php echo $row['agent_service_id']; ?>" onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/header.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Services | Admin</title>
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
-    <style>
-/* ===== MAIN CONTENT ===== */
-.main-content {
-    margin-left: 260px;  /* sidebar width */
-    margin-top: 60px;    /* header height */
-    padding: 20px;
-    min-height: calc(100vh - 60px);
-    background: #f3f4f6;
-    font-family: Arial, sans-serif;
-}
-
-/* ===== TABLE ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-top: 20px;
-}
-
-table thead tr {
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-}
-
-table thead th {
-    padding: 12px 15px;
-    font-size: 14px;
-}
-
-table tbody tr {
-    border-bottom: 1px solid #e5e7eb;
-    transition: background 0.2s;
-}
-
-table tbody tr:hover {
-    background: #f0f4ff;
-}
-
-table tbody td {
-    padding: 10px 15px;
-    font-size: 13px;
-    color: #1f2937;
-}
-
-/* Responsive table */
-@media(max-width: 768px){
-    table thead { display: none; }
-    table, table tbody, table tr, table td { display: block; width: 100%; }
-    table tbody tr { margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; }
-    table tbody td {
-        padding-left: 50%;
-        position: relative;
-        text-align: left;
-    }
-    table tbody td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        top: 10px;
-        font-weight: 600;
-        color: #2563eb;
-        font-size: 13px;
-    }
-}
-
-/* ===== FOOTER ===== */
-footer {
-    width: calc(100% - 260px);
-    margin-left: 260px;
-    background: #1e293b;
-    color: #fff;
-    padding: 15px 20px;
-    text-align: center;
-    font-size: 13px;
-    position: relative;
-}
-</style>
-
-</head>
-<body>
-    <div class="main-content">
-    <h2>Agent Services</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Agent Name</th>
-                <th>Service</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = mysqli_fetch_assoc($result)) { ?>
-            <tr>
-                <td data-label="Agent Name"><?= htmlspecialchars($row['agent_name']); ?></td>
-                <td data-label="Service"><?= htmlspecialchars($row['service_name']); ?></td>
-                <td data-label="City"><?= htmlspecialchars($row['city_name'] ?? 'All Cities'); ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
-
-
-<?php include('includes/footer.php'); ?>
-

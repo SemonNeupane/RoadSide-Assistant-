@@ -104,7 +104,7 @@ table th{background:#f1f5f9;color:#1f2937;}
 
 
 <!-- Header -->
-<div class="admin-topbar">
+<!-- <div class="admin-topbar">
     <div class="admin-topbar-left">
         <h3>Welcome Back, <?php echo $admin_name; ?> 👋</h3>
     </div>
@@ -118,8 +118,9 @@ table th{background:#f1f5f9;color:#1f2937;}
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
+<?php include('includes/sidebar.php'); ?>
+<?php include('includes/header.php'); ?>
 <!-- Main Content -->
 <div class="main-content">
 

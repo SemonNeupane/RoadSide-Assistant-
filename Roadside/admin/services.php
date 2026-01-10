@@ -7,122 +7,30 @@ if (empty($_SESSION['admin_id'])) {
     exit();
 }
 
-$q = mysqli_query($con, "SELECT service_id, service_name, description FROM services");
+
+// Fetch all services
+$result = mysqli_query($con, "SELECT * FROM services ORDER BY service_name ASC");
 ?>
 
-<?php include('includes/sidebar.php'); ?>
-<?php include('includes/header.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | Admin</title>
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
-    <style>
-.main-content {
-    margin-left: 260px; /* sidebar width */
-    margin-top: 60px;   /* header height */
-    padding: 20px;
-    min-height: calc(100vh - 60px);
-    background: #f3f4f6;
-    font-family: Arial, sans-serif;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-top: 20px;
-}
-
-table thead tr {
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-}
-
-table thead th {
-    padding: 12px 15px;
-    font-size: 14px;
-}
-
-table tbody tr {
-    border-bottom: 1px solid #e5e7eb;
-    transition: background 0.2s;
-}
-
-table tbody tr:hover {
-    background: #f0f4ff;
-}
-
-table tbody td {
-    padding: 10px 15px;
-    font-size: 13px;
-    color: #1f2937;
-}
-
-footer {
-    width: calc(100% - 260px);
-    margin-left: 260px;
-    background: #1e293b;
-    color: #fff;
-    padding: 15px 20px;
-    text-align: center;
-    font-size: 13px;
-}
-
-@media(max-width: 768px){
-    table thead { display: none; }
-    table, table tbody, table tr, table td { display: block; width: 100%; }
-    table tbody tr { margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; }
-    table tbody td {
-        padding-left: 50%;
-        position: relative;
-        text-align: left;
-    }
-    table tbody td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        top: 10px;
-        font-weight: 600;
-        color: #2563eb;
-        font-size: 13px;
-    }
-}
-</style>
-</head>
-<body>
-    <div class="main-content">
-    <h2>Services List</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($r = mysqli_fetch_assoc($q)) { ?>
-            <tr>
-                <td data-label="ID"><?= $r['service_id'] ?></td>
-                <td data-label="Name"><?= htmlspecialchars($r['service_name']) ?></td>
-                <td data-label="Description"><?= htmlspecialchars($r['description']) ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
-
-</body>
-</html>
-
-<?php include('includes/footer.php'); ?>
-
-
+<h2>Services</h2>
+<a href="add-service.php" class="btn btn-success">Add New Service</a>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Service Name</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    <?php while($row = mysqli_fetch_assoc($result)): ?>
+    <tr>
+        <td><?= $row['service_id'] ?></td>
+        <td><?= htmlspecialchars($row['service_name']) ?></td>
+        <td><?= htmlspecialchars($row['description']) ?></td>
+        <td>
+            <a href="edit-service.php?id=<?= $row['service_id'] ?>">Edit</a> | 
+            <a href="delete-service.php?id=<?= $row['service_id'] ?>" 
+               onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    <?php endwhile; ?>
+</table>
