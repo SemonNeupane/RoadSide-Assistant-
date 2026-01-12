@@ -1,8 +1,9 @@
 <?php
+session_start();
 include(__DIR__ . '/../includes/dbconnection.php');
 
-// --- SAMPLE USER ID for testing ---
-$user_id = 1;  // replace with session user_id if needed
+// Use logged-in user
+$user_id = $_SESSION['user_id'] ?? 1; // fallback for testing
 
 // Fetch Provinces, Districts, Cities, Services
 $province_q = mysqli_query($con, "SELECT province_id, province_name FROM province ORDER BY province_name ASC");
@@ -44,7 +45,7 @@ if(isset($_POST['submit'])){
     $booking_id = $stmt->insert_id;
     $stmt->close();
 
-    // Send request to active agents in the same city offering this service
+    // Find active agents in same city offering this service
     $agents = mysqli_query($con, "
         SELECT a.agent_id 
         FROM agent a
@@ -73,16 +74,7 @@ if(isset($_POST['submit'])){
 <head>
 <meta charset="UTF-8">
 <title>Service Request</title>
-<style>
-body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:0;}
-.container{width:90%;max-width:700px;margin:50px auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-h2{text-align:center;color:#0A924E;margin-bottom:20px;}
-label{display:block;margin-bottom:5px;font-weight:bold;color:#64748b;}
-input, select{width:100%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #d1d5db;font-size:15px;}
-input[type="submit"]{background:#0A924E;color:#fff;border:none;padding:12px;font-size:16px;cursor:pointer;border-radius:8px;transition:0.3s;}
-input[type="submit"]:hover{background:#0b2e59;}
-.msg{font-weight:bold;margin-bottom:15px;color:green;text-align:center;}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -112,34 +104,22 @@ input[type="submit"]:hover{background:#0b2e59;}
 <label>Province</label>
 <select name="province_id" required>
 <option value="">Select Province</option>
-<?php
-mysqli_data_seek($province_q,0);
-while($p=mysqli_fetch_assoc($province_q)){
-    echo "<option value='{$p['province_id']}'>{$p['province_name']}</option>";
-}
-?>
+<?php mysqli_data_seek($province_q,0);
+while($p=mysqli_fetch_assoc($province_q)){ echo "<option value='{$p['province_id']}'>{$p['province_name']}</option>"; } ?>
 </select>
 
 <label>District</label>
 <select name="district_id" required>
 <option value="">Select District</option>
-<?php
-mysqli_data_seek($district_q,0);
-while($d=mysqli_fetch_assoc($district_q)){
-    echo "<option value='{$d['district_id']}'>{$d['district_name']}</option>";
-}
-?>
+<?php mysqli_data_seek($district_q,0);
+while($d=mysqli_fetch_assoc($district_q)){ echo "<option value='{$d['district_id']}'>{$d['district_name']}</option>"; } ?>
 </select>
 
 <label>City</label>
 <select name="city_id" required>
 <option value="">Select City</option>
-<?php
-mysqli_data_seek($city_q,0);
-while($c=mysqli_fetch_assoc($city_q)){
-    echo "<option value='{$c['city_id']}'>{$c['city_name']}</option>";
-}
-?>
+<?php mysqli_data_seek($city_q,0);
+while($c=mysqli_fetch_assoc($city_q)){ echo "<option value='{$c['city_id']}'>{$c['city_name']}</option>"; } ?>
 </select>
 
 <label>Landmark / Pickup Location</label>

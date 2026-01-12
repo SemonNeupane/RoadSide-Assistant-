@@ -2,10 +2,10 @@
 session_start();
 include(__DIR__ . '/../includes/dbconnection.php');
 
-// Example agent ID for testing (replace with session)
-$agent_id = 1;
+// Logged-in agent
+$agent_id = $_SESSION['agent_id'] ?? 1; // replace with actual session
 
-// Handle AJAX actions
+// Handle AJAX actions (approve/reject/delete)
 if(isset($_POST['ajax_action'], $_POST['request_id'])){
     $request_id = intval($_POST['request_id']);
     $action = $_POST['ajax_action'];
@@ -18,18 +18,13 @@ if(isset($_POST['ajax_action'], $_POST['request_id'])){
         $booking_id = $req['booking_id'];
 
         if($action==='approve'){
-            // Approve this agent
             mysqli_query($con,"UPDATE booking_requests SET status='accepted', responded_at=NOW() WHERE request_id='$request_id'");
-            // Disable other agents for same booking
             mysqli_query($con,"UPDATE booking_requests SET status='disabled', responded_at=NOW() WHERE booking_id='$booking_id' AND agent_id!='$agent_id'");
-            // Assign agent to booking
             mysqli_query($con,"UPDATE booking SET agent_id='$agent_id', status='active' WHERE booking_id='$booking_id'");
             $response=['status'=>1,'msg'=>'You have accepted the service request.'];
-
         } elseif($action==='reject'){
             mysqli_query($con,"UPDATE booking_requests SET status='rejected', responded_at=NOW() WHERE request_id='$request_id'");
             $response=['status'=>1,'msg'=>'You have rejected the service request.'];
-
         } elseif($action==='delete'){
             mysqli_query($con,"DELETE FROM booking_requests WHERE request_id='$request_id' AND agent_id='$agent_id'");
             $response=['status'=>1,'msg'=>'Request removed.'];
@@ -37,6 +32,7 @@ if(isset($_POST['ajax_action'], $_POST['request_id'])){
     } else {
         $response=['status'=>0,'msg'=>'Request not found.'];
     }
+
     echo json_encode($response);
     exit();
 }
@@ -63,24 +59,7 @@ ORDER BY br.request_id DESC
 <meta charset="UTF-8">
 <title>Assigned Booking Requests</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:0;}
-.container{width:95%;max-width:1000px;margin:50px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-h2{text-align:center;color:#0A924E;margin-bottom:20px;}
-table{width:100%;border-collapse:collapse;}
-table th, table td{padding:10px;border:1px solid #ddd;text-align:left;}
-th{background:#0b2e59;color:#fff;}
-.badge{padding:4px 10px;border-radius:8px;color:#fff;font-size:12px;}
-.badge-pending{background:#f59e0b;}
-.badge-accepted{background:#16a34a;}
-.badge-rejected{background:#ef4444;}
-.badge-disabled{background:#6b7280;}
-button{padding:6px 12px;border:none;border-radius:6px;color:#fff;cursor:pointer;margin-right:5px;}
-button.approve{background:#16a34a;}
-button.reject{background:#ef4444;}
-button.delete{background:#6b7280;}
-.msg{text-align:center;font-weight:bold;margin-bottom:15px;color:green;}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
