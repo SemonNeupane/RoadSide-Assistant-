@@ -68,7 +68,7 @@ $name = isset($row['username']) ? htmlspecialchars($row['username']) : 'Agent';
             <span class="menu-arrow">&#9654;</span>
         </a>
         <ul class="nav-second-level">
-            <li><a href="assigned-services.php">Assigned Services</a></li>
+            
             <li><a href="service-locations.php">Service Locations</a></li>
         </ul>
     </li>
